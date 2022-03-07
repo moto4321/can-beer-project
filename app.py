@@ -1,1 +1,1 @@
-print('bear can! 한상훈 222')
+print('bear can!')
