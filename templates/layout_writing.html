@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>한 캔 beer | 작성페이지</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            width: 500px;
+            margin-top: 20px;
+        }
+
+        .wrap {
+            width: 900px;
+            margin: auto;
+        }
+
+        .container {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1>새로운 맥주를 등록합니다.</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
+                </div>
+                <br><br><br><br>
+                <div class="beer-name">
+                    <label>맥주 이름을 입력해주세요</label>
+                    <input type="text" class="form-control" id="beer-name" placeholder="제품명">
+                </div>
+                <br><br>
+                <div class="beer-type">
+                    <label>맥주 종류를 입력해주세요</label>
+                    <select class="form-control" id="beer-type">
+                        <option>----맥주 종류를 선택해주세요----</option>
+                        <option>에일</option>
+                        <option>포터/스카우트</option>
+                        <option>밀맥주</option>
+                        <option>라거</option>
+                        <option>발포주</option>
+                    </select>
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label>맥주 제조사를 입력해주세요</label>
+                    <input type="text" class="form-control" id="beer-where" placeholder="제조사 이름">
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label>맥주 제조국를 입력해주세요</label>
+                    <input type="text" class="form-control" id="beer-country" placeholder="제조국 입력">
+                </div>
+
+                <br><br>
+
+
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">신상품입니까?</label>
+                </div>
+                 <br><br>
+                 <br><br>
+                <button type="submit" class="btn btn-primary">작성하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
