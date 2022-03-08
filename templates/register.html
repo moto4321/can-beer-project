@@ -11,9 +11,22 @@
 
         <!-- Bulma CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+        <style>
+            * {
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+            .box{
+                max-width: 500px;
+                width: 95%;
+                margin: 50px auto 0 auto;
+            }
+        </style>
+
 
         <script>
             function register() {
@@ -27,6 +40,7 @@
                         phone_give: $('#userphone').val()
                     },
                     success: function (response) {
+                        console.log(response)
                         if (response['result'] == 'success') {
                             alert('회원가입이 완료되었습니다.')
                             window.location.href = '/login'
@@ -37,62 +51,84 @@
                 })
             }
 
+         {#   //아이디 중복체크#}
+         {#function check_id() {#}
+         {#    let id = $('#id').val()#}
+         {#    $.ajax({#}
+         {#        type: "POST",#}
+         {#        url: "/api/register",#}
+         {#        data: {id_give:id},#}
+         {#        success: function (response) {#}
+         {#            $('#res').append('msg');#}
+         {#            window.location.reload()#}
+         {#        }#}
+         {#    })#}
+         {#}#}
+
+
+        function check_input() {
+            let pw = $('#userpw').val()
+            let pw2 = $('#userpw2').val()
+            let id = $('#userid').val()
+            //let c = document.getElementById('res');
+            if(id == ''){
+                alert("아이디를 입력해주세요.");
+            } else if (pw == '' || pw2 == '') {
+                alert("비밀번호를 입력해주세요.");
+            } else if (pw != pw2 ) {
+                alert("비밀번호를 확인해주세요.");
+                pw = "";
+                pw2 = "";
+            } else if (pw.length < 8 ) {
+                alert("비밀번호를 8자리 이상 입력해주세요.");
+            } else {
+                register();
+            }
+        }
         </script>
     </head>
     <body>
-        <div class="section has-text-centered">
-            <h1 class="title">회원가입 페이지</h1>
-            <div class="container" style="width:60%">
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="userid">ID</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="input" id="userid" aria-describedby="emailHelp"
-                                       placeholder="My ID">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="userpw">PW</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="password" class="input" id="userpw" placeholder="My Password">
-                            </div>
-                        </div>
+        <section class="hero is-success">
+            <div class="hero-body">
+                <p class="title">캔을 beer</p>
+                <p class="subtitle">회원가입</p>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <div class="box">
+                <div class="field">
+                    <label class="label">ID</label>
+                    <div class="control">
+                    <input id="userid" class="input" type="text" placeholder="아이디를 입력해주세요">
                     </div>
                 </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="usernick">NAME</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="input" id="username" placeholder="My Nickname">
-                            </div>
-                        </div>
+{#                <div class="field" id="res" placeholder="중복을 확인해주세요"><div class="control"></div></div><button onclick="check_id()">아이디 중복체크</button>#}
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                    <input id="userpw" class="input" type="password" placeholder="********">
                     </div>
                 </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="usernick">PHONE</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="input" id="userphone" placeholder="My Phone">
-                            </div>
-                        </div>
+                <div class="field">
+                    <label class="label">Password check</label>
+                    <div class="control">
+                    <input id="userpw2" class="input" type="password" placeholder="********">
                     </div>
                 </div>
-                <button class="button is-primary" onclick="register()">회원가입</button>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                    <input id="username" class="input" type="text">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Phone</label>
+                    <div class="control">
+                    <input id="userphone" class="input" type="text" placeholder="000-0000-0000">
+                    </div>
+                </div>
+                <button class="button is-primary" onclick="check_input()">회원가입</button>
             </div>
         </div>
     </body>

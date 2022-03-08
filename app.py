@@ -207,7 +207,7 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
@@ -218,8 +218,19 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+    # #회원가입시 아이디 중복체크
+    # @app.route('/api/register', methods=['POST'])
+    # def check_id():
+    #     id_receive = request.form['id_give']
+    #     user = db.users.find_one({'id': id_receive})
+    #     if user is not None:  # 유저있으면
+    #         return jsonify({'msg': '아이디 사용 불가'})
+    #     else:
+    #         return jsonify({'msg': '아이디 사용 가능'})
 
-    # [유저 정보 확인 API]
+
+
+# [유저 정보 확인 API]
     # 로그인된 유저만 call 할 수 있는 API입니다.
     # 유효한 토큰을 줘야 올바른 결과를 얻어갈 수 있습니다.
     # (그렇지 않으면 남의 장바구니라든가, 정보를 누구나 볼 수 있겠죠?)
