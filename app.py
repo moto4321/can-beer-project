@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 app = Flask(__name__)
-
+import os
 from pymongo import MongoClient
 import certifi
 from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
@@ -12,74 +12,19 @@ db = client.dbcanbear
 
 SECRET_KEY = 'SPARTA'
 import jwt
-import datetime
 import hashlib
 
 
 @app.route('/')
 def home():
-
-    # #doc로 만들어 db에 저장하기
-    # doc = {
-    #     'beer_num':1,
-    #     'beer_name':"CASS",
-    #     'beer_type':"밀맥주",
-    #     'beer_company':"하이트 진로",
-    #     'country':'한국',
-    #     'price':[{'store':'CU', 'one':3500, 'four':11000},
-    #              {'store':'GS', 'one':3500, 'four':10000},
-    #              {'store': 'MiniStop', 'one': 4000, 'four': 11000}
-    #              ]
-    # }
-    # db.content.insert_one(doc)
-    #
-    # doc = {
-    #     'beer_num': 2,
-    #     'beer_name': "TERRA",
-    #     'beer_type': "보리맥주",
-    #     'beer_company': "하이트 진로",
-    #     'country': '한국',
-    #     'price': [{'store': 'CU', 'one': 3700, 'four': 11000},
-    #               {'store': 'GS', 'one': 4000, 'four': 11000},
-    #               {'store': 'NoBrand', 'one': 3200, 'four': 10000}
-    #               ]
-    # }
-    # db.content.insert_one(doc)
-    #
-    # doc = {
-    #     'beer_num': 3,
-    #     'beer_name': "MAX",
-    #     'beer_type': "보리맥주",
-    #     'beer_company': "하이트 진로",
-    #     'country': '한국',
-    #     'price': [{'store': 'CU', 'one': 3500, 'four': 11000},
-    #               {'store': 'MiniStop', 'one': 4000, 'four': 11000},
-    #               {'store': 'NoBrand', 'one': 2500, 'four': 10000}
-    #               ]
-    # }
-    # db.content.insert_one(doc)
-
     content_list = list(db.content.find({}, {'_id': False}))
 
-    # # for i in content_list:
-    # print(content_list[2]['price'])
-    #
-    # test = sorted(content_list[2]['price'], key=(lambda x: x['one']))
-    # content_list[2]['price'] = test
-    #
-    # print(content_list[2]['price'])
-    #
-    #
-    # aa = [{"job": "teacher", "age": 30},
-    #       {"job": "doctor", "age": 40},
-    #       {"job": "engineer", "age": 30}]
-    #
-    # rr = sorted(aa, key=(lambda x: x['job']))
-    # print('aa:', aa)
-    # print('rr:', rr)
+    for row in content_list:
+        print(row['price'])
+        row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
+        row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
 
-    return render_template('index.html', content_list = content_list)
-
+    return render_template('index.html', content_list=content_list)
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
@@ -90,7 +35,7 @@ def save_beer():
     beer_name = request.form['beer_name']
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
-    beer_new_check=request.form['beer_new_check']
+    beer_date= request.form['beer_date']
 
     #밑쪽으로는 파일 저장하기
     file = request.files["file_give"]
@@ -107,7 +52,7 @@ def save_beer():
         'beer_name':beer_name,
         'beer_type':beer_type,
         'beer_company':beer_company,
-        'beer_new_check':beer_new_check,
+        'beer_date':beer_date,
         'file':f'{filename}.{extantion}'
     }
     db.content.insert_one(doc)
