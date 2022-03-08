@@ -6,16 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
+    <title>캔을 Beer</title>
 
-    <title>Title</title>
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .title {
+            width: 100%;
+            height: 250px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://mblogthumb-phinf.pstatic.net/20130626_3/ttl1125ejr_1372227070451EIL5b_JPEG/%BE%CB%B7%CF%B4%DE%B7%CF.jpg?type=w2');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title > button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .title > button:hover {
+            border: 2px solid white;
+        }
+
+        .list {
+            margin: 20px auto 0px auto;
+            width: 95%;
+            max-width: 1200px;
+        }
+
+    </style>
 </head>
 <body>
-    can bear!
+    <div class="title">
+        <h1>캔을 Beer!</h1>
+    </div>
+    <div class="list">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+            {% for i in range(10) %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://cdn.shopify.com/s/files/1/0489/1682/4215/products/1Iq_mJKzqhJKmU-WsSsREPZrJSFtRGKqg_1024x1024.png?v=1609425800"
+                             class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ content_list[0].beer_name }}</h5>
+                            <p>{{ content_list[0].beer_type }}</p>
+                            <p>{{ content_list[0].beer_company }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

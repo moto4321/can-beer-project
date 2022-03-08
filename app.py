@@ -11,8 +11,9 @@ db = client.dbcanbear
 
 @app.route('/')
 def home():
-   return render_template('layout_writing.html')
+    content_list = list(db.content.find({}, {'_id': False}))
 
+    return render_template('index.html', content_list = content_list)
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
