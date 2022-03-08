@@ -27,7 +27,8 @@ def home():
     #     'beer_company':"하이트 진로",
     #     'country':'한국',
     #     'price':[{'store':'CU', 'one':3500, 'four':11000},
-    #              {'store':'GS', 'one':3500, 'four':11000}
+    #              {'store':'GS', 'one':3500, 'four':10000},
+    #              {'store': 'MiniStop', 'one': 4000, 'four': 11000}
     #              ]
     # }
     # db.content.insert_one(doc)
@@ -38,8 +39,9 @@ def home():
     #     'beer_type': "보리맥주",
     #     'beer_company': "하이트 진로",
     #     'country': '한국',
-    #     'price': [{'store': 'CU', 'one': 3500, 'four': 11000},
-    #               {'store': 'CU', 'one': 3500, 'four': 11000}
+    #     'price': [{'store': 'CU', 'one': 3700, 'four': 11000},
+    #               {'store': 'GS', 'one': 4000, 'four': 11000},
+    #               {'store': 'NoBrand', 'one': 3200, 'four': 10000}
     #               ]
     # }
     # db.content.insert_one(doc)
@@ -51,7 +53,8 @@ def home():
     #     'beer_company': "하이트 진로",
     #     'country': '한국',
     #     'price': [{'store': 'CU', 'one': 3500, 'four': 11000},
-    #               {'store': 'CU', 'one': 3500, 'four': 11000}
+    #               {'store': 'MiniStop', 'one': 4000, 'four': 11000},
+    #               {'store': 'NoBrand', 'one': 2500, 'four': 10000}
     #               ]
     # }
     # db.content.insert_one(doc)
