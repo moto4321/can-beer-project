@@ -52,8 +52,6 @@
 
         // 디테일 전체 GET
         function get_detail() {
-            let beer_num = 1
-
             $.ajax({
                 type: 'GET',
                 url: `/detail/${beer_num}`,
@@ -67,6 +65,11 @@
         function post_review() {
             let review = $('#review').val()
             let star = $('#star').val()
+
+            if (!review || star.length !== 1) {
+                alert('리뷰와 별점을 작성해 주세요!!')
+                return
+            }
 
             console.log(review)
             console.log(star)
