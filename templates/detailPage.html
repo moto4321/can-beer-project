@@ -66,6 +66,11 @@
             let review = $('#review').val()
             let star = $('#star').val()
 
+            if (!review || star.length !== 1) {
+                alert('리뷰와 별점을 작성해 주세요!!')
+                return
+            }
+
             console.log(review)
             console.log(star)
 
