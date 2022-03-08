@@ -44,6 +44,16 @@
             margin: 0 20px;
             float: right;
         }
+        .delbtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 50px;
+        }
+
+
     </style>
     <script>
         $(document).ready(function () {
@@ -65,6 +75,7 @@
         function post_review() {
             let review = $('#review').val()
             let star = $('#star').val()
+            let beer_num = {{ beer_num }}
 
             if (!review || star.length !== 1) {
                 alert('리뷰와 별점을 작성해 주세요!!')
@@ -78,7 +89,7 @@
                 type: 'POST',
                 url: `/review`,
                 data: {
-                    beer_num: 1,
+                    beer_num: beer_num,
                     review_give: review,
                     star_give: star,
                 },
@@ -102,6 +113,7 @@
                 }
             })
         }
+
     </script>
 </head>
 <body>
@@ -111,17 +123,21 @@
             <div class="card">
 {#          <img src="..." class="card-img-top" alt="...">#}
             이미지 들어올 것
+            </div>
         </div>
-    </div>
         <div class="col">
             <div class="card">
                 <div class="card-body">
                     <p><h5 class="card-title">맥주명 : {{ detail.beer_name }}</h5></p>
                     <p class="card-text">타입 : {{ detail.beer_type }}</p>
                     <p class="card-text">제조사 : {{ detail.beer_company }}</p>
+                    <p class="card-text">제조국 : {{ detail.country }}</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="delbtn">
+        <button onclick="update_post()" type="button" class="btn btn-success">게시물 수정</button>
     </div>
     <div class="mypost" id="post-box">
         <div class="form-floating mb-3">
@@ -147,11 +163,14 @@
                 {% set review_one = review["review"] %}
                 {% set star_one = '⭐' * review["star"]|int %}
                 {% set review_num = review["review_num"] %}
+                {% set review_writer = review["id"] %}
                 <p>
                     <li>
                         {{ review_one }}
                         {{ star_one }}
-                        <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
+                        {% if review_writer == current_id %}
+                            <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
+                        {% endif %}
                     </li>
                     <hr />
                 </p>
