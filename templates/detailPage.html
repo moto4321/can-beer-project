@@ -53,9 +53,6 @@
             margin-top: 50px;
         }
 
-        .is-hidden {
-            display: none;
-        }
 
     </style>
     <script>
@@ -78,10 +75,7 @@
         function post_review() {
             let review = $('#review').val()
             let star = $('#star').val()
-
-            // 여기서 token 가져오기
-            let token = getCookie("mytoken")
-            console.log(token)
+            let beer_num = {{ beer_num }}
 
             if (!review || star.length !== 1) {
                 alert('리뷰와 별점을 작성해 주세요!!')
@@ -95,7 +89,7 @@
                 type: 'POST',
                 url: `/review`,
                 data: {
-                    beer_num: 1,
+                    beer_num: beer_num,
                     review_give: review,
                     star_give: star,
                 },
@@ -120,9 +114,6 @@
             })
         }
 
-        function delete_post() {
-
-        }
     </script>
 </head>
 <body>
@@ -146,7 +137,7 @@
         </div>
     </div>
     <div class="delbtn">
-        <button onclick="delete_post()" type="button" class="btn btn-danger is-hidden">게시물 삭제</button>
+        <button onclick="update_post()" type="button" class="btn btn-success">게시물 수정</button>
     </div>
     <div class="mypost" id="post-box">
         <div class="form-floating mb-3">
@@ -172,11 +163,14 @@
                 {% set review_one = review["review"] %}
                 {% set star_one = '⭐' * review["star"]|int %}
                 {% set review_num = review["review_num"] %}
+                {% set review_writer = review["id"] %}
                 <p>
                     <li>
                         {{ review_one }}
                         {{ star_one }}
-                        <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
+                        {% if review_writer == current_id %}
+                            <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
+                        {% endif %}
                     </li>
                     <hr />
                 </p>
