@@ -22,9 +22,18 @@ def home():
 
     # 맥주별 최저가를 구해서 리스트에 추가
     for row in content_list:
-        print(row['price'])
         row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
         row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
+        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
+
+        sum_star = 0
+        if len(review_list) != 0:
+            for review_row in review_list:
+                sum_star += review_row['star']
+
+        row['star_point'] = round(sum_star / len(review_list), 1)
+        # print('sum star', sum_star)
+        # print('avg star', round(sum_star / len(review_list), 1))
 
     return render_template('index.html', content_list=content_list)
 
