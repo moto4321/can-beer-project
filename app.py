@@ -3,8 +3,12 @@ app = Flask(__name__)
 import os
 from pymongo import MongoClient
 import certifi
+<<<<<<< HEAD
 #from datetime import datetime  # 파일명 생성을 위한 datetime 라이브러리 사용
 import datetime
+=======
+from datetime import datetime, timedelta # 파일명 생성을 위한 datetime 라이브러리 사용
+>>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
 ca = certifi.where()
 #client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
@@ -69,9 +73,22 @@ def beer_detail(beer_num):
     # print(beer_num)
     detail = db.content.find_one({'beer_num': int(beer_num)}, {'_id': False})
     reviews = list(db.review.find({'beer_num':int(beer_num), 'deleted': 0}, {'_id': False}))
+
+    # 현재 접속되어있는 사용자
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+    current_id = userinfo['id']
+
     # print(reviews)
     # reviews = response
-    return render_template('detailPage.html', detail=detail, reviews=reviews)
+    return render_template(
+        'detailPage.html',
+        detail=detail,
+        reviews=reviews,
+        beer_num=beer_num,
+        current_id=current_id
+    )
 
 
 
@@ -95,7 +112,7 @@ def post_review():
         'review_num': count,
         'beer_num': int(beer_num),
         'review': review_receive,
-        'star': star_receive,
+        'star': int(star_receive),
         'deleted': 0
     }
     db.review.insert_one(data)
@@ -106,14 +123,27 @@ def post_review():
 @app.route('/remove/review', methods=["POST"])
 def delete_review():
     review_num = request.form["review_num"]
+<<<<<<< HEAD
+=======
+    print(review_num)
+
+    # db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
+    # return jsonify({'msg': '삭제완료'})
+>>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
 
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
     writer = db.review.find_one({'id':userinfo['id']})
+<<<<<<< HEAD
     print(userinfo)
     print(writer)
     if userinfo['id'] == writer:
+=======
+
+
+    if userinfo['id'] == writer['id']:
+>>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
         db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
         return jsonify({'msg': '삭제완료'})
     else:
@@ -122,6 +152,7 @@ def delete_review():
 
 
 
+<<<<<<< HEAD
     # # 유저 정보 확인
     # @app.route('/api/detailPage', methods=['GET'])
     # def api_valid():
@@ -137,6 +168,23 @@ def delete_review():
     #         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     #     except jwt.exceptions.DecodeError:
     #         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+=======
+# 유저 정보 확인
+@app.route('/api/detailPage', methods=['GET'])
+def api_valid():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
+        # 그리고 유저정보의 id 를 꺼내는 과정
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+        #return jsonify({'result': 'success', 'id': userinfo['id']})
+        return render_template('detailPage.html', id=userinfo["id"])
+    except jwt.ExpiredSignatureError:
+        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
+    except jwt.exceptions.DecodeError:
+        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+>>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
 
 
 @app.route('/login')
@@ -192,11 +240,15 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
+<<<<<<< HEAD
             'exp': datetime.datetime.now() + datetime.timedelta(seconds=60 * 60 * 24)
+=======
+            # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
+>>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-
         # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
