@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 app = Flask(__name__)
-
+import os
 from pymongo import MongoClient
 import certifi
 from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
@@ -12,7 +12,6 @@ db = client.dbcanbear
 
 SECRET_KEY = 'SPARTA'
 import jwt
-import datetime
 import hashlib
 
 
@@ -90,7 +89,7 @@ def save_beer():
     beer_name = request.form['beer_name']
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
-    beer_new_check=request.form['beer_new_check']
+    beer_date= request.form['beer_date']
 
     #밑쪽으로는 파일 저장하기
     file = request.files["file_give"]
@@ -107,7 +106,7 @@ def save_beer():
         'beer_name':beer_name,
         'beer_type':beer_type,
         'beer_company':beer_company,
-        'beer_new_check':beer_new_check,
+        'beer_date':beer_date,
         'file':f'{filename}.{extantion}'
     }
     db.content.insert_one(doc)

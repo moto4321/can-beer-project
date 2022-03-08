@@ -54,11 +54,9 @@
             let beer_type = $("#beer-type").val()
             let beer_company = $("#beer-company").val()
             let beer_country = $("#beer-country").val()
-            let beer_new_check = $("#beer_new_check").val()
+            let beer_date = $("#beer-date").val()
 
-
-
-            let file = $('#file')[0].files[0]
+            let file = $("#file")[0].files[0]
             let form_data = new FormData()
 
             form_data.append("file_give", file)
@@ -66,7 +64,7 @@
             form_data.append("beer_type", beer_type)
             form_data.append("beer_company", beer_company)
             form_data.append("beer_country", beer_country)
-            form_data.append("beer_new_check", beer_new_check)
+            form_data.append("beer_date", beer_date)
 
 
             $.ajax({
@@ -123,12 +121,11 @@
                     <input type="text" class="form-control" id="beer-country" placeholder="제조국 입력">
                 </div>
                 <br><br>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="beer_new_check">
-                    <label class="form-check-label" for="defaultCheck1">신상품입니까?(출시 한달 이전)</label>
+                <div class="form-group">
+                    <label>맥주 제조날짜</label>
+                    <p><input type="date" id="beer-date"></p>
                 </div>
-                <br><br>
-                <br><br>
+
                 <button onclick="posting_new()" type="submit" class="btn btn-primary">작성하기</button>
             </div>
         </div>
