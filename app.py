@@ -18,8 +18,10 @@ import hashlib
 
 @app.route('/')
 def home():
+    # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
+    # 맥주별 최저가를 구해서 리스트에 추가
     for row in content_list:
         print(row['price'])
         row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
