@@ -46,6 +46,28 @@
         }
     </style>
     <script>
+        (document).ready(function () {
+            $('.btnAdd').click(function () {
+                $('.buttons').append(
+                    '<select class="form-select" aria-label="Default select example">\n' +
+                    '  <option selected>눌러서 편의점 선택</option>\n' +
+                    '  <option value="미니스톱">미니스톱</option>\n' +
+                    '  <option value="GS25">GS25</option>\n' +
+                    '  <option value="노브랜드">노브랜드</option>\n' +
+                    '  <option value="세븐일레븐">세븐일레븐</option>' +
+                    '  <option value="씨유">씨유</option>' +
+                    '</select>' +
+                    '<input type="text" name="txt" placeholder="1개당 가격"><input type="text" name="txt" placeholder="4개당 가격"><input type="button" class="btnRemove" value="Remove"><br><br>'
+                ); // end append
+                $('.btnRemove').on('click', function () {
+                    $(this).prev().remove(); // remove the textbox
+                    $(this).prev().remove(); // remove the textbox
+                    $(this).prev().remove(); // remove the selectbox
+                    $(this).next().remove(); // remove the <br>
+                    $(this).remove(); // remove the button
+                });
+            }); // end click
+        }); // end ready
         $(document).ready(function () {
             bsCustomFileInput.init()
         })
@@ -125,7 +147,17 @@
                     <label>맥주 제조날짜</label>
                     <p><input type="date" id="beer-date"></p>
                 </div>
-
+                <div class="buttonss">
+                    <select class="form-select" aria-label="Default select example" id="beer-store">
+                        <option selected>눌러서 편의점 선택</option>
+                        <option value="미니스톱">미니스톱</option>
+                        <option value="GS25">GS25</option>
+                        <option value="노브랜드">노브랜드</option>
+                        <option value="세븐일레븐">세븐일레븐</option>
+                        <option value="씨유">씨유</option>
+                    </select>
+                    <input type="text" name="txt" placeholder="1개당 가격" id="beer-one-price"><input type="text" name="txt" placeholder="4개당 가격" id="beer-four-price"> <input type="button" class="btnAdd" value="Add"><br>
+                </div>
                 <button onclick="posting_new()" type="submit" class="btn btn-primary">작성하기</button>
             </div>
         </div>
