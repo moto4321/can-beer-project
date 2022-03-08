@@ -68,15 +68,17 @@
     </div>
     <div class="list">
         <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-            {% for i in range(10) %}
-                <div class="col" onclick="window.location.href='/detail/{{ content_list[0].beer_num }}'">
+            {% for row in content_list %}
+                <div class="col" onclick="window.location.href='/detail/{{ row.beer_num }}'">
                     <div class="card h-100">
                         <img src="https://cdn.shopify.com/s/files/1/0489/1682/4215/products/1Iq_mJKzqhJKmU-WsSsREPZrJSFtRGKqg_1024x1024.png?v=1609425800"
                              class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">{{ content_list[0].beer_name }}</h5>
-                            <p>{{ content_list[0].beer_type }}</p>
-                            <p>{{ content_list[0].beer_company }}</p>
+                            <h5 class="card-title">{{ row.beer_name }}</h5>
+                            <p>{{ row.beer_type }}</p>
+                            <p>{{ row.beer_company }}</p>
+                            <p>{{ row.one_min }}</p>
+                            <p>{{ row.four_min }}</p>
                         </div>
                     </div>
                 </div>

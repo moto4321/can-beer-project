@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 app = Flask(__name__)
-
+import os
 from pymongo import MongoClient
 import certifi
 from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
@@ -12,74 +12,19 @@ db = client.dbcanbear
 
 SECRET_KEY = 'SPARTA'
 import jwt
-import datetime
 import hashlib
 
 
 @app.route('/')
 def home():
-
-    # #doc로 만들어 db에 저장하기
-    # doc = {
-    #     'beer_num':1,
-    #     'beer_name':"CASS",
-    #     'beer_type':"밀맥주",
-    #     'beer_company':"하이트 진로",
-    #     'country':'한국',
-    #     'price':[{'store':'CU', 'one':3500, 'four':11000},
-    #              {'store':'GS', 'one':3500, 'four':10000},
-    #              {'store': 'MiniStop', 'one': 4000, 'four': 11000}
-    #              ]
-    # }
-    # db.content.insert_one(doc)
-    #
-    # doc = {
-    #     'beer_num': 2,
-    #     'beer_name': "TERRA",
-    #     'beer_type': "보리맥주",
-    #     'beer_company': "하이트 진로",
-    #     'country': '한국',
-    #     'price': [{'store': 'CU', 'one': 3700, 'four': 11000},
-    #               {'store': 'GS', 'one': 4000, 'four': 11000},
-    #               {'store': 'NoBrand', 'one': 3200, 'four': 10000}
-    #               ]
-    # }
-    # db.content.insert_one(doc)
-    #
-    # doc = {
-    #     'beer_num': 3,
-    #     'beer_name': "MAX",
-    #     'beer_type': "보리맥주",
-    #     'beer_company': "하이트 진로",
-    #     'country': '한국',
-    #     'price': [{'store': 'CU', 'one': 3500, 'four': 11000},
-    #               {'store': 'MiniStop', 'one': 4000, 'four': 11000},
-    #               {'store': 'NoBrand', 'one': 2500, 'four': 10000}
-    #               ]
-    # }
-    # db.content.insert_one(doc)
-
     content_list = list(db.content.find({}, {'_id': False}))
 
-    # # for i in content_list:
-    # print(content_list[2]['price'])
-    #
-    # test = sorted(content_list[2]['price'], key=(lambda x: x['one']))
-    # content_list[2]['price'] = test
-    #
-    # print(content_list[2]['price'])
-    #
-    #
-    # aa = [{"job": "teacher", "age": 30},
-    #       {"job": "doctor", "age": 40},
-    #       {"job": "engineer", "age": 30}]
-    #
-    # rr = sorted(aa, key=(lambda x: x['job']))
-    # print('aa:', aa)
-    # print('rr:', rr)
+    for row in content_list:
+        print(row['price'])
+        row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
+        row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
 
-    return render_template('index.html', content_list = content_list)
-
+    return render_template('index.html', content_list=content_list)
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
@@ -90,7 +35,7 @@ def save_beer():
     beer_name = request.form['beer_name']
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
-    beer_new_check=request.form['beer_new_check']
+    beer_date= request.form['beer_date']
 
     #밑쪽으로는 파일 저장하기
     file = request.files["file_give"]
@@ -107,7 +52,7 @@ def save_beer():
         'beer_name':beer_name,
         'beer_type':beer_type,
         'beer_company':beer_company,
-        'beer_new_check':beer_new_check,
+        'beer_date':beer_date,
         'file':f'{filename}.{extantion}'
     }
     db.content.insert_one(doc)
@@ -125,6 +70,8 @@ def beer_detail(beer_num):
     # reviews = response
     return render_template('detailPage.html', detail=detail, reviews=reviews)
 
+
+
 # 리뷰 작성 POST라우트 (+ 새로고침)
 @app.route('/review', methods=["POST"])
 def post_review():
@@ -132,27 +79,59 @@ def post_review():
     star_receive = request.form['star_give']
     beer_num = request.form['beer_num']
 
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+    id = userinfo['id']
+
     review_list = list(db.review.find({}, {'_id': False}))
     count = len(review_list) + 1
 
     data = {
+        'id': id,
         'review_num': count,
         'beer_num': int(beer_num),
         'review': review_receive,
         'star': star_receive,
         'deleted': 0
     }
-
     db.review.insert_one(data)
     return jsonify({'msg': '등록완료'})
-    # return render_template('detailPage.html')
 
-# 리뷰 삭제 POST라우트 (+ 새로고침)
+
+#리뷰 삭제 POST라우트 (+ 새로고침)
 @app.route('/remove/review', methods=["POST"])
 def delete_review():
     review_num = request.form["review_num"]
-    db.review.update_one({'review_num': int(review_num)},{'$set':{'deleted':1}})
-    return jsonify({'msg': '삭제완료'})
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+    writer = db.review.find_one({'id':userinfo['id']})
+    if userinfo['id'] == writer:
+        db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
+        return jsonify({'msg': '삭제완료'})
+    else:
+        return jsonify({'msg': '삭제 불가'})
+
+
+
+
+    # 유저 정보 확인
+    @app.route('/api/detailPage', methods=['GET'])
+    def api_valid():
+        token_receive = request.cookies.get('mytoken')
+        try:
+            payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+            # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
+            # 그리고 유저정보의 id 를 꺼내는 과정
+            userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+            #return jsonify({'result': 'success', 'id': userinfo['id']})
+            return render_template('detailPage.html', id=userinfo["id"])
+        except jwt.ExpiredSignatureError:
+            return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
+        except jwt.exceptions.DecodeError:
+            return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
 
 @app.route('/login')
 def login():
@@ -230,28 +209,6 @@ def api_login():
 
 
 
-# [유저 정보 확인 API]
-    # 로그인된 유저만 call 할 수 있는 API입니다.
-    # 유효한 토큰을 줘야 올바른 결과를 얻어갈 수 있습니다.
-    # (그렇지 않으면 남의 장바구니라든가, 정보를 누구나 볼 수 있겠죠?)
-    # @app.route('/api/nick', methods=['GET']) 토큰 필요한 주소 넣기
-    # def api_valid():
-    #     token_receive = request.cookies.get('mytoken')
-    #     try:
-    #         # token을 시크릿키로 디코딩합니다.
-    #         # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
-    #         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    #         print(payload)
-    #
-    #         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
-    #         # 여기에선 그 예로 닉네임을 보내주겠습니다.
-    #         userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-    #         return jsonify({'result': 'success', 'nickname': userinfo['nick']})
-    #     except jwt.ExpiredSignatureError:
-    #         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
-    #         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    #     except jwt.exceptions.DecodeError:
-    #         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
 if __name__ == '__main__':
