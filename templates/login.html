@@ -15,7 +15,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-
+        <style>
+            * {
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+            .box{
+                max-width: 500px;
+                width: 95%;
+                margin: 50px auto 0 auto;
+            }
+        </style>
         <script>
             {#// {% if msg %}#}
             {#//     alert("{{ msg }}")#}
@@ -50,36 +59,29 @@
 
     </head>
     <body>
-        <div class="section has-text-centered">
-            <h1 class="title">로그인 페이지</h1>
-            <div class="container" style="width:60%">
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="userid">ID</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="input" id="userid" aria-describedby="emailHelp"
-                                       placeholder="My ID">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="userpw">PW</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="password" class="input" id="userpw" placeholder="My Password">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="button is-primary" onclick="login()">로그인</button>
+        <section class="hero is-success">
+            <div class="hero-body">
+                <p class="title">캔을 beer</p>
+                <p class="subtitle">로그인</p>
             </div>
-        </div>
+        </section>
+
+        <form class="box">
+            <div class="field">
+                <label class="label">ID</label>
+                <div class="control">
+                    <input class="input" id="userid" type="text">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" id="userpw" type="password">
+                </div>
+            </div>
+            <button class="button is-primary" onclick="login()">로그인</button>
+        </form>
+
     </body>
 </html>
