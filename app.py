@@ -47,5 +47,45 @@ def save_beer():
 
     return jsonify({'msg': '새 맥주 등록 완료'})
 
+
+# 상품 디테일 페이지 GET라우트 (+ 리뷰 목록까지 가져오기)
+@app.route('/detail/<beer_num>', methods=["GET"])
+def beer_detail(beer_num):
+    # print(beer_num)
+    detail = db.content.find_one({'beer_num': int(beer_num)}, {'_id': False})
+    reviews = list(db.review.find({'beer_num':int(beer_num), 'deleted': 0}, {'_id': False}))
+    # print(reviews)
+    # reviews = response
+    return render_template('detailPage.html', detail=detail, reviews=reviews)
+
+# 리뷰 작성 POST라우트 (+ 새로고침)
+@app.route('/review', methods=["POST"])
+def post_review():
+    review_receive = request.form['review_give']
+    star_receive = request.form['star_give']
+    beer_num = request.form['beer_num']
+
+    review_list = list(db.review.find({}, {'_id': False}))
+    count = len(review_list) + 1
+
+    data = {
+        'review_num': count,
+        'beer_num': int(beer_num),
+        'review': review_receive,
+        'star': star_receive,
+        'deleted': 0
+    }
+
+    db.review.insert_one(data)
+    return jsonify({'msg': '등록완료'})
+    # return render_template('detailPage.html')
+
+# 리뷰 삭제 POST라우트 (+ 새로고침)
+@app.route('/remove/review', methods=["POST"])
+def delete_review():
+    review_num = request.form["review_num"]
+    db.review.update_one({'review_num': int(review_num)},{'$set':{'deleted':1}})
+    return jsonify({'msg': '삭제완료'})
+
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=5000, debug=True)
+   app.run('0.0.0.0', port=3001, debug=True)
