@@ -71,7 +71,7 @@
             {% for row in content_list %}
                 <div class="col" onclick="window.location.href='/detail/{{ row.beer_num }}'">
                     <div class="card h-100">
-                        <img src="https://cdn.shopify.com/s/files/1/0489/1682/4215/products/1Iq_mJKzqhJKmU-WsSsREPZrJSFtRGKqg_1024x1024.png?v=1609425800"
+                        <img src="/static/{{ row.file }}"
                              class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ row.beer_name }}</h5>
