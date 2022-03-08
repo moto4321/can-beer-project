@@ -57,17 +57,19 @@
             width: 95%;
             max-width: 1200px;
         }
-
     </style>
 </head>
 <body>
     <div class="title">
         <h1>캔을 Beer!</h1>
+        <button onclick="window.location.href='/layout_writing'">신상등록</button>
+        <button onclick="window.location.href='/login'">로그인</button>
+        <button onclick="window.location.href='/register'">회원가입</button>
     </div>
     <div class="list">
         <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
             {% for i in range(10) %}
-                <div class="col">
+                <div class="col" onclick="window.location.href='/detail/{{ content_list[0].beer_num }}'">
                     <div class="card h-100">
                         <img src="https://cdn.shopify.com/s/files/1/0489/1682/4215/products/1Iq_mJKzqhJKmU-WsSsREPZrJSFtRGKqg_1024x1024.png?v=1609425800"
                              class="card-img-top">
