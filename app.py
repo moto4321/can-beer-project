@@ -18,6 +18,12 @@ import hashlib
 # 메인 페이지
 @app.route('/')
 def home():
+    # 토큰 확인
+    token_receive = request.cookies.get('mytoken')
+    isLogin = False
+    if token_receive is not None:
+        isLogin = True
+
     # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
@@ -82,7 +88,7 @@ def home():
     elif align_type == 9:
         random.shuffle(content_list)
 
-    return render_template('index.html', content_list=content_list)
+    return render_template('index.html', content_list=content_list, isLogin=isLogin)
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
@@ -250,6 +256,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/logout')
+def logout():
+    msg = request.args.get("msg")
+    return render_template('logout.html', msg=msg)
 
 @app.route('/register')
 def register():
