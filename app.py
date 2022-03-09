@@ -3,7 +3,7 @@ app = Flask(__name__)
 import os
 from pymongo import MongoClient
 import certifi
-from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
+from datetime import datetime, timedelta # 파일명 생성을 위한 datetime 라이브러리 사용
 ca = certifi.where()
 #client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
@@ -93,13 +93,20 @@ def beer_detail(beer_num):
     reviews = list(db.review.find({'beer_num':int(beer_num), 'deleted': 0}, {'_id': False}))
 
     # 현재 접속되어있는 사용자
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-    current_id = userinfo['id']
+    try:
+        token_receive = request.cookies.get('mytoken')
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+        current_id = userinfo['id']
+    except jwt.exceptions.DecodeError:
+        return render_template(
+        'detailPage.html',
+        detail=detail,
+        reviews=reviews,
+        beer_num=beer_num
+    )
 
     # print(reviews)
-    # reviews = response
     return render_template(
         'detailPage.html',
         detail=detail,
@@ -257,4 +264,4 @@ def api_login():
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=3001, debug=True)
+   app.run('0.0.0.0', port=5000, debug=True)
