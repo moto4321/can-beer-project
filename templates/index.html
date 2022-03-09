@@ -12,82 +12,113 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+
     <title>캔을 Beer</title>
 
-    <style>
-        * {
-            font-family: 'Gowun Dodum', sans-serif;
-        }
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        .title {
-            width: 100%;
-            height: 250px;
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://mblogthumb-phinf.pstatic.net/20130626_3/ttl1125ejr_1372227070451EIL5b_JPEG/%BE%CB%B7%CF%B4%DE%B7%CF.jpg?type=w2');
-            background-position: center;
-            background-size: cover;
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-            color: white;
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
 
-        .title > button {
-            width: 200px;
-            height: 50px;
-
-            background-color: transparent;
-            color: white;
-
-            border-radius: 50px;
-            border: 1px solid white;
-
-            margin-top: 10px;
-        }
-
-        .title > button:hover {
-            border: 2px solid white;
-        }
-
-        .list {
-            margin: 20px auto 0px auto;
-            width: 95%;
-            max-width: 1200px;
-        }
-    </style>
 </head>
 <body>
-    <div class="title">
-        <h1>캔을 Beer!</h1>
-        <button onclick="window.location.href='/layout_writing'">신상등록</button>
-        <button onclick="window.location.href='/login'">로그인</button>
-        <button onclick="window.location.href='/register'">회원가입</button>
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+        <div class="logo">
+            <h1 class="text-light"><a href="index.html">캔을 Beer!</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="/layout_writing">신상품 등록</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/register">회원가입</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
     </div>
-    <div class="list">
-        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-            {% for row in content_list %}
-                <div class="col" onclick="window.location.href='/detail/{{ row.beer_num }}'">
-                    <div class="card h-100">
-                        <img src="/static/{{ row.file }}"
-                             class="card-img-top">
-                        <div class="card-body">
-                            {% if row.new_beer %}
-                                <p>신상품</p>
-                            {%  endif %}
-                            <h5 class="card-title">{{ row.beer_name }}</h5>
-                            <p>{{ row.star_point }}</p>
-                            <p>{{ row.beer_type }}</p>
-                            <p>{{ row.beer_company }}</p>
-                            <p>{{ row.one_min }}</p>
-                            <p>{{ row.four_min }}</p>
+</header><!-- End Header -->
+
+<main id="main">
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+
+            <div class="row portfolio-container" data-aos="fade-up">
+                {% for row in content_list %}
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app"
+                         onclick="window.location.href='/detail/{{ row.beer_num }}'">
+                        <img height="300px" src="/static/{{ row.file }}">
+                        <div class="portfolio-info" align="center">
+                            <h2>{{ row.beer_name }}</h2>
+                                {% if row.new_beer %}
+                                    <h5>신상품</h5>
+                                {% endif %}
+                            <h5>⭐ {{ row.star_point }}</h5>
+
+                            <p>제조사 : {{ row.beer_company }}</p>
+                            <p>종류 : {{ row.beer_type }}</p>
+                            <p>1개당 가격 : {{ row.one_min }}원</p>
+                            <p>4개당 가격 : {{ row.four_min }}원</p>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    </section><!-- End Portfolio Section -->
+
+</main><!-- End #main -->
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/assets/vendor/aos/aos.js"></script>
+<script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="static/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/assets/js/main.js"></script>
+
 </body>
 </html>
