@@ -10,29 +10,30 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbcanbear
 
-
 SECRET_KEY = 'SPARTA'
 import jwt
 import hashlib
 
-
+# 메인 페이지
 @app.route('/')
 def home():
+    # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
+    # 맥주별 최저가를 구해서 맥주 리스트에 추가
     for row in content_list:
-        row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
-        row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
-        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
+        if 'price' in row:
+            row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
+            row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
 
+        # 맥주별 리뷰를 조회해서 평균값을 맥주 리스트에 추가
+        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
         sum_star = 0
         if len(review_list) != 0:
             for review_row in review_list:
                 sum_star += review_row['star']
 
-        row['star_point'] = round(sum_star / len(review_list), 1)
-        # print('sum star', sum_star)
-        # print('avg star', round(sum_star / len(review_list), 1))
+            row['star_point'] = round(sum_star / len(review_list), 1)
 
     return render_template('index.html', content_list=content_list)
 
