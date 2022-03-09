@@ -50,7 +50,11 @@
     <!-- Template Main CSS File -->
     <link href="static/assets/css/style.css" rel="stylesheet">
 
-
+    <script>
+        function fnAlign(){
+            window.location.href="/?align_type=" + $("#align-type").val()
+        }
+    </script>
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -80,7 +84,20 @@
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-
+            <div class="offset-lg-10 col-lg-2 offset-md-10 col-md-2">
+                <select class="form-control" id="align-type" onchange="fnAlign()">
+                    <option align="center" value="0">--- 정렬 ---</option>
+                    <option align="center" value="1">최근 상품순</option>
+                    <option align="center" value="2">오래된 상품순</option>
+                    <option align="center" value="3">1개 가격 낮은순</option>
+                    <option align="center" value="4">1개 가격 높은순</option>
+                    <option align="center" value="5">4개 가격 낮은순</option>
+                    <option align="center" value="6">4개 가격 높은순</option>
+                    <option align="center" value="7">별점 높은순</option>
+                    <option align="center" value="8">별점 낮은순</option>
+                    <option align="center" value="9">랜덤</option>
+                </select>
+            </div>
             <div class="row portfolio-container" data-aos="fade-up">
                 {% for row in content_list %}
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app"
@@ -88,9 +105,9 @@
                         <img height="300px" src="/static/{{ row.file }}">
                         <div class="portfolio-info" align="center">
                             <h2>{{ row.beer_name }}</h2>
-                                {% if row.new_beer %}
-                                    <h5>신상품</h5>
-                                {% endif %}
+                            {% if row.new_beer %}
+                                <h5>신상품</h5>
+                            {% endif %}
                             <h5>⭐ {{ row.star_point }}</h5>
 
                             <p>제조사 : {{ row.beer_company }}</p>
