@@ -102,7 +102,7 @@ def home():
 def save_beer():
     def checking(a):
         print(a)
-        if a is "":
+        if a == "":
             a=0
             print("빈 문자열 발견")
         return (a)
@@ -364,6 +364,7 @@ def api_login():
             'exp': datetime.utcnow() + timedelta(seconds=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
         # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})
