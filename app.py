@@ -320,17 +320,11 @@ def api_login():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
 
-    print(id_receive, pw_receive)
-
     # 회원가입 때와 같은 방법으로 pw를 암호화합니다.
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    print(pw_hash)
-
     # id, 암호화된pw을 가지고 해당 유저를 찾습니다.
     result = db.users.find_one({'id': id_receive, 'pw': pw_hash})
-
-    print(result)
 
     # 찾으면 JWT 토큰을 만들어 발급합니다.
     if result is not None:
@@ -345,8 +339,6 @@ def api_login():
             'exp': datetime.utcnow() + timedelta(seconds=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
-        print(token)
 
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
         # token을 줍니다.
