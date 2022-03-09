@@ -18,20 +18,47 @@
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
         <style>
-            * {
-                font-family: 'Nanum Pen Script', cursive;
-                font-size: large;
-            }
-            .box{
+             .title, .subtitle{
+                text-align: center;
+             }
+             .box{
+                font-weight: 400;
+                color: rgb(33, 37, 41);
                 max-width: 500px;
                 width: 95%;
                 margin: 100px auto 0 auto;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 24px 0px;
+                padding: 30px;
+            }
+            .input{
+                border-radius: 0px;
+            }
+            .input:active{
+                border-color: #25cff2;
+                border-size: 1px;
+                box-shadow: none;
             }
             .footer{
                 margin-top: 100px;
             }
-            .title, .subtitle{
+            .title, .subtitle {
                 text-align: center;
+            }
+            .field{
+                margin-bottom: 30px;
+            }
+            .label{
+                color: white;
+                font-size: 1px;
+            }
+            .lastdiv{
+                text-align: center;
+            }
+            button:hover {
+                background: rgb(253, 92, 40);
+            }
+            .red-btn{
+                margin-left: 10px;
             }
         </style>
         <script>
@@ -85,20 +112,24 @@
 
         <form class="box">
             <div class="field">
-                <label class="label">ID</label>
+                <label class="label">blank</label>
                 <div class="control">
-                    <input class="input" id="userid" type="text">
+                    <input class="input" id="userid" type="text" placeholder="ID">
                 </div>
             </div>
-
             <div class="field">
-                <label class="label">Password</label>
+                <label class="label">blank</label>
                 <div class="control">
-                    <input class="input" id="userpw" type="password">
+                    <input class="input" id="userpw" type="password" placeholder="Password">
                 </div>
             </div>
-            <button class="button is-warning" onclick="history.back()">뒤로가기</button>
-            <button class="button is-primary" onclick="login()">로그인</button>
+            <div class="field">
+                <label class="label">blank</label>
+                <div class="control lastdiv">
+                <button class="button is-danger is-outlined" onclick="history.back()">뒤로가기</button>
+            <button class="button is-danger red-btn" onclick="login()">로그인</button>
+                </div>
+            </div>
         </form>
 
         <footer class="footer">
