@@ -69,10 +69,13 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="/layout_writing">신상품 등록</a></li>
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/logout">로그아웃</a></li>
-                <li><a href="/register">회원가입</a></li>
+                {% if isLogin %}
+                    <li><a href="/layout_writing">신상품 등록</a></li>
+                    <li><a href="/logout">로그아웃</a></li>
+                {% else %}
+                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/register">회원가입</a></li>
+                {% endif %}
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -108,7 +111,9 @@
                             {% if row.new_beer %}
                                 <h5>신상품</h5>
                             {% endif %}
-                            <h5>⭐ {{ row.star_point }}</h5>
+                            {% if row.star_point != 0 %}
+                                <h5>⭐ {{ row.star_point }}</h5>
+                            {% endif %}
 
                             <p>제조사 : {{ row.beer_company }}</p>
                             <p>종류 : {{ row.beer_type }}</p>

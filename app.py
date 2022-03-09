@@ -18,6 +18,12 @@ import hashlib
 # 메인 페이지
 @app.route('/')
 def home():
+    # 토큰 확인
+    token_receive = request.cookies.get('mytoken')
+    isLogin = False
+    if token_receive is not None:
+        isLogin = True
+
     # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
@@ -34,6 +40,8 @@ def home():
                 sum_star += review_row['star']
 
             row['star_point'] = round(sum_star / len(review_list), 1)
+        else:
+            row['star_point'] = 0
 
         # 맥주 출시일과 오늘간 날짜를 비교하여 신상품 여부를 맥주 리스트에 추가
         beer_date = datetime.strptime(row['beer_date'], '%Y-%m-%d')
@@ -43,8 +51,12 @@ def home():
         else:
             row['new_beer'] = False
 
+    if 'align_type' in request.args:
+        align_type = int(request.args.get('align_type'))
+    else:
+        align_type = 0
+
     # 맥주 정렬
-    align_type = int(request.args.get('align_type'))
     # 0 : 기본 정렬
     if align_type == 0:
         content_list = content_list
@@ -76,7 +88,7 @@ def home():
     elif align_type == 9:
         random.shuffle(content_list)
 
-    return render_template('index.html', content_list=content_list)
+    return render_template('index.html', content_list=content_list, isLogin=isLogin)
 
 
 
@@ -264,6 +276,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/logout')
+def logout():
+    msg = request.args.get("msg")
+    return render_template('logout.html', msg=msg)
 
 @app.route('/register')
 def register():
