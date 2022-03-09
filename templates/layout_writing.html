@@ -93,20 +93,17 @@
         }
 
 
-
-
         .wrap {
 
             width: 600px;
             margin-top: 20px;
             margin: auto;
             font-family: 'Stylish', sans-serif;
-            padding : 50px 40px 20px 20px;
+            padding: 50px 40px 20px 20px;
             text-align: center;
 
-justify-content: center;
-align-items: center;
-
+            justify-content: center;
+            align-items: center;
 
 
         }
@@ -265,84 +262,82 @@ align-items: center;
 
 <div class="wrap">
 
-        <h1>새로운 맥주를 등록합니다.</h1>
-        <br>
-        <div class="container">
-            <div class="posting-box" id="question">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file">
-                    <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
-                </div>
-                <div class="beer-name">
-                    <label>맥주 이름을 입력해주세요</label>
-                        <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
-                    </div>
-                </div>
-                <div class="beer-type">
-                    <label>맥주 종류를 입력해주세요</label>
-                    <select class="form-control" id="beer-type">
-                        <option>----맥주 종류를 선택해주세요----</option>
-                        <option>에일</option>
-                        <option>포터/스카우트</option>
-                        <option>밀맥주</option>
-                        <option>라거</option>
-                        <option>발포주</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>맥주 제조사를 입력해주세요</label>
-                        <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>맥주 제조국를 입력해주세요</label>
-                        <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
-                    </div>
-                <div class="form-group">
-                    <label>맥주 제조날짜</label>
-                    <p><input type="date" id="beer-date"></p>
-                </div>
-                <div class="form-group">
-                    <label>미니스톱에서 파나요?</label>
-                    <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>GS25에서 파나요?</label>
-                    <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>CU에서 파나요?</label>
-                    <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>세븐일레븐에서 파나요?</label>
-                    <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>노브랜드에서 파나요?</label>
-                    <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                </div>
-
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-success" onclick="posting_new()">작성하기</button>
-                </div>
-                <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-                    <i class="bi bi-arrow-up-short"></i></a>
+    <h1>새로운 맥주를 등록합니다.</h1>
+    <br>
+    <div class="container">
+        <div class="posting-box" id="question">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file">
+                <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
             </div>
+            <div class="beer-name">
+                <label>맥주 이름을 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
+            </div>
+            <div class="beer-type">
+                <label>맥주 종류를 입력해주세요</label>
+                <select class="form-control" id="beer-type">
+                    <option>----맥주 종류를 선택해주세요----</option>
+                    <option>에일</option>
+                    <option>포터/스카우트</option>
+                    <option>밀맥주</option>
+                    <option>라거</option>
+                    <option>발포주</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>맥주 제조사를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
+            </div>
+
+            <div class="form-group">
+                <label>맥주 제조국를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
+            </div>
+            <div class="form-group">
+                <label>맥주 제조날짜</label>
+                <p><input type="date" id="beer-date"></p>
+            </div>
+            <div class="form-group">
+                <label>미니스톱에서 파나요?</label>
+                <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>GS25에서 파나요?</label>
+                <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>CU에서 파나요?</label>
+                <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>세븐일레븐에서 파나요?</label>
+                <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>노브랜드에서 파나요?</label>
+                <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-success" onclick="posting_new()">작성하기</button>
+            </div>
+            <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+                <i class="bi bi-arrow-up-short"></i></a>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
