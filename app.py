@@ -23,6 +23,7 @@ def home():
     # 토큰 확인
     token_receive = request.cookies.get('mytoken')
     isLogin = False
+    # 토큰이 있으면 로그인 플래그 설정
     if token_receive is not None:
         isLogin = True
 
@@ -53,41 +54,32 @@ def home():
         else:
             row['new_beer'] = False
 
+    # 정렬 타입 확인하여
     if 'align_type' in request.args:
         align_type = int(request.args.get('align_type'))
     else:
         align_type = 0
 
-    # 맥주 정렬
-    # 0 : 기본 정렬
-    if align_type == 0:
+    # 맥주 리스트 정렬
+    if align_type == 0: # 기본 정렬
         content_list = content_list
-    # 1 : 최근 상품순
-    elif align_type == 1:
+    elif align_type == 1:   # 최근 상품순
         content_list = sorted(content_list, key=(lambda x: x['beer_date']))
-    # 2 : 오래된 상품순
-    elif align_type == 2:
+    elif align_type == 2:   # 오래된 상품순
         content_list = sorted(content_list, key=(lambda x: x['beer_date']), reverse=True)
-    # 3 : 1개 가격 낮은순
-    elif align_type == 3:
+    elif align_type == 3:   # 1개 가격 낮은순
         content_list = sorted(content_list, key=(lambda x: x['one_min']))
-    # 4 : 1개 가격 높은순
-    elif align_type == 4:
+    elif align_type == 4:   # 1개 가격 높은순
         content_list = sorted(content_list, key=(lambda x: x['one_min']), reverse=True)
-    # 5 : 4개 가격 낮은순
-    elif align_type == 5:
+    elif align_type == 5:   # 4개 가격 낮은순
         content_list = sorted(content_list, key=(lambda x: x['four_min']))
-    # 6 : 4개 가격 높은순
-    elif align_type == 6:
+    elif align_type == 6:   # 4개 가격 높은순
         content_list = sorted(content_list, key=(lambda x: x['four_min']), reverse=True)
-    # 7 : 별점 높은순
-    elif align_type == 7:
+    elif align_type == 7:   # 별점 높은순
         content_list = sorted(content_list, key=(lambda x: x['star_point']), reverse=True)
-    # 8 : 별점 낮은순
-    elif align_type == 8:
+    elif align_type == 8:   # 별점 낮은순
         content_list = sorted(content_list, key=(lambda x: x['star_point']))
-    # 9 : 랜덤
-    elif align_type == 9:
+    elif align_type == 9:   #  랜덤
         random.shuffle(content_list)
 
     return render_template('index.html', content_list=content_list, isLogin=isLogin)

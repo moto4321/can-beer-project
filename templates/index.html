@@ -27,7 +27,6 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-
     <title>캔을 Beer</title>
 
     <!-- Favicons -->
@@ -51,8 +50,8 @@
     <link href="static/assets/css/style.css" rel="stylesheet">
 
     <script>
-        function fnAlign(){
-            window.location.href="/?align_type=" + $("#align-type").val()
+        function fnAlign() {
+            window.location.href = "/?align_type=" + $("#align-type").val()
         }
     </script>
 </head>
@@ -60,7 +59,6 @@
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex justify-content-between">
-
         <div class="logo">
             <h1 class="text-light"><a href="index.html">캔을 Beer!</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
@@ -79,8 +77,6 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-
-
     </div>
 </header><!-- End Header -->
 
@@ -115,7 +111,6 @@
                             {% if row.star_point != 0 %}
                                 <h5>⭐ {{ row.star_point }}</h5>
                             {% endif %}
-
                             <p>제조사 : {{ row.beer_company }}</p>
                             <p>종류 : {{ row.beer_type }}</p>
                             <p>1개당 가격 : {{ row.one_min }}원</p>
@@ -126,7 +121,6 @@
             </div>
         </div>
     </section><!-- End Portfolio Section -->
-
 </main><!-- End #main -->
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
