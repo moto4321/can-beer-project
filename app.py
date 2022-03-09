@@ -4,10 +4,8 @@ import os
 from pymongo import MongoClient
 import certifi
 from datetime import datetime, timedelta # 파일명 생성을 위한 datetime 라이브러리 사용
-<<<<<<< HEAD
 #from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
-=======
->>>>>>> 7a4478a8e40bf64a55e9452e6866199390afda70
+
 ca = certifi.where()
 #client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
