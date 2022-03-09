@@ -280,11 +280,32 @@ def api_login():
     #         return jsonify({'msg': '아이디 사용 가능'})
 
 
-@app.route('/update/detail', methods=['POST'])
-def update_post():
-    beer_num = request.form['beer_num']
-    beer_detail = db.content.find_one({'beer_num': beer_num}, {'_id': False})
 
+# @app.route('/update/detail', methods=["POST"])
+# def update_post():
+#     beer_num = request.form['beer_num']
+#     beer_detail = db.content.find_one({'beer_num': int(beer_num)}, {'_id': False})
+#     # print(beer_detail)
+#     # return jsonify({'msg': 'hello'})
+#     beer_name = beer_detail['beer_name']
+#     beer_type = beer_detail['beer_type']
+#     beer_company = beer_detail['beer_company']
+#     country = beer_detail['country']
+#     price = beer_detail['price']
+#     print(beer_detail)
+#     # beer_num = beer_num,
+#     # beer_name_old = beer_name,
+#     # beer_type_old = beer_type,
+#     # beer_company_old = beer_company,
+#     # country_old = country,
+#     # price_old = price
+#     return redirect(url_for('layout_writing'))
+#     # return render_template('layout_writing.html', beer_name_old=beer_name)
+#
+#
+# @app.route('/layout_writing')
+# def update():
+#     return render_template('layout_writing.html')
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=3001, debug=True)

@@ -41,15 +41,88 @@
             margin: auto;
         }
 
-        .wrap .<
         .container {
             padding-left: 50px;
         }
     </style>
     <script>
+
         $(document).ready(function () {
+
             bsCustomFileInput.init()
+            // console.log(decodeURI(window.location.search))
+
+            let updateState = false
+            let len = decodeURI(window.location.search).length
+            let temp = decodeURI(window.location.search).substr(1, len - 1)
+            let arr = temp.split("&")
+            let result =[]
+            for (let i = 0; i < arr.length; i++) {
+                result.push(arr[i].split("="))
+            }
+            if (result[4][1] !== '') {
+                updateState = true
+            }
+            console.log(result)
+
+            $("#beer-name").val(result[0][1])
+            $("#beer-type").val(result[1][1])
+            $("#beer-company").val(result[2][1])
+            $("#beer-country").val(result[3][1])
+
+            console.log(updateState)
+            let aa = []
+            for (let i = 5; i < result.length; i++) {
+                aa.push(result[i][1].split("+"))
+            }
+
+            console.log(aa)
+
+            let bb = []
+            for (let i = 0; i < aa.length; i++) {
+                bb.push(aa[i][3])
+
+            }
+            let one = []
+            for (let i =0; i  < bb.length; i++) {
+                one.push(bb[i].split("%"))
+            }
+
+            let four = []
+            for (let i = 0;  i < aa.length; i++) {
+                let last = aa[i][5].substr(0, aa[i][5].length - 1)
+                {#let last = aa[i][5]#}
+                four.push(last)
+            }
+
+            {#console.log(four)#}
+
+
+            for (let i = 5; i < result.length; i++) {
+                // console.log(result[i])
+                if (result[i][1].includes('GS')) {
+                    $("#GS-price-1").val(one[i - 5][0])
+                    $("#GS-price-4").val(four[i - 5])
+                } else if (result[i][1].includes('NoBrand')) {
+                    $("#nobrand-price-1").val(one[i - 5][0])
+                    $("#nobrand-price-4").val(four[i - 5])
+                } else if (result[i][1].includes('CU')) {
+                    $("#CU-price-1").val(one[i - 5][0])
+                    $("#CU-price-4").val(four[i - 5])
+                } else if (result[i][1].includes('MiniStop')) {
+                    $("#mini-price-1").val(one[i - 5][0])
+                    $("#mini-price-4").val(four[i - 5])
+                } else if (result[i][1].includes('seven')) {
+                    $("#seven-price-1").val(one[i - 5][0])
+                    $("#seven-price-4").val(four[i - 5])
+                }
+            }
+
+
+
         })
+
+
         function posting_new() {
                 let beer_name = $("#beer-name").val()
                 let beer_type = $("#beer-type").val()
@@ -174,7 +247,7 @@
                     <label>노브랜드에서 파나요?</label>
                     <input type="text" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="nobrand-price-1" placeholder="4개당 가격"
+                    <input type="text" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 
