@@ -153,9 +153,6 @@ def delete_review():
     userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
     writer = db.review.find_one({'id':userinfo['id']})
 
-    print(userinfo)
-    print(writer)
-
     if userinfo['id'] == writer['id']:
         db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
         return jsonify({'msg': '삭제완료'})
@@ -241,9 +238,7 @@ def api_login():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
