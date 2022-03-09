@@ -2,14 +2,23 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,31 +29,31 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>한 캔 beer | 작성페이지</title>
+    <title>캔을 Beer</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <style>
-        * {
-            font-family: 'Jua', sans-serif;
-        }
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
-        .posting-box {
-            width: 500px;
-            margin-top: 20px;
-        }
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-        .wrap {
-            width: 900px;
-            margin: auto;
-        }
-
-        .container {
-            padding-left: 50px;
-        }
+{#        .container {#}
+{#            padding-left: 50px;#}
+{#        }#}
     </style>
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
     <script>
 
         $(document).ready(function () {
@@ -124,60 +133,71 @@
 
 
         function posting_new() {
-                let beer_name = $("#beer-name").val()
-                let beer_type = $("#beer-type").val()
-                let beer_company = $("#beer-company").val()
-                let beer_country = $("#beer-country").val()
-                let beer_date = $("#beer-date").val()
-                let mini_price_1 = $("#mini-price-1").val()
-                let mini_price_4 = $("#mini-price-4").val()
-                let gs_price_1 = $("#GS-price-1").val()
-                let gs_price_4 = $("#GS-price-4").val()
-                let cu_price_1 = $("#CU-price-1").val()
-                let cu_price_4 = $("#CU-price-4").val()
-                let seven_price_1 = $("#seven-price-1").val()
-                let seven_price_4 = $("#seven-price-4").val()
-                let nobrand_price_1 = $("#nobrand-price-1").val()
-                let nobrand_price_4 = $("#nobrand-price-4").val()
-
-                let file = $("#file")[0].files[0]
-                let form_data = new FormData()
-
-                form_data.append("file_give", file)
-                form_data.append("beer_name", beer_name)
-                form_data.append("beer_type", beer_type)
-                form_data.append("beer_company", beer_company)
-                form_data.append("beer_country", beer_country)
-                form_data.append("beer_date", beer_date)
-                form_data.append("mini_price_1", mini_price_1)
-                form_data.append("mini_price_4", mini_price_4)
-                form_data.append("gs_price_1", gs_price_1)
-                form_data.append("gs_price_4", gs_price_4)
-                form_data.append("cu_price_1", cu_price_1)
-                form_data.append("cu_price_4", cu_price_4)
-                form_data.append("seven_price_1", seven_price_1)
-                form_data.append("seven_price_4", seven_price_4)
-                form_data.append("nobrand_price_1", nobrand_price_1)
-                form_data.append("nobrand_price_4", nobrand_price_4)
+            let beer_name = $("#beer-name").val()
+            let beer_type = $("#beer-type").val()
+            let beer_company = $("#beer-company").val()
+            let beer_country = $("#beer-country").val()
+            let beer_date = $("#beer-date").val()
+            let mini_price_1 = $("#mini-price-1").val()
+            let mini_price_4 = $("#mini-price-4").val()
+            let gs_price_1 = $("#GS-price-1").val()
+            let gs_price_4 = $("#GS-price-4").val()
+            let cu_price_1 = $("#CU-price-1").val()
+            let cu_price_4 = $("#CU-price-4").val()
+            let seven_price_1 = $("#seven-price-1").val()
+            let seven_price_4 = $("#seven-price-4").val()
+            let nobrand_price_1 = $("#nobrand-price-1").val()
+            let nobrand_price_4 = $("#nobrand-price-4").val()
 
 
-                $.ajax({
-                    type: "POST",
-                    url: "/api/writing",
-                    data: form_data,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        alert(response["msg"])
-                        window.location.reload()
-                    }
-                });
-            }
+            let file = $("#file")[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("beer_name", beer_name)
+            form_data.append("beer_type", beer_type)
+            form_data.append("beer_company", beer_company)
+            form_data.append("beer_country", beer_country)
+            form_data.append("beer_date", beer_date)
+            form_data.append("mini_price_1", mini_price_1)
+            form_data.append("mini_price_4", mini_price_4)
+            form_data.append("gs_price_1", gs_price_1)
+            form_data.append("gs_price_4", gs_price_4)
+            form_data.append("cu_price_1", cu_price_1)
+            form_data.append("cu_price_4", cu_price_4)
+            form_data.append("seven_price_1", seven_price_1)
+            form_data.append("seven_price_4", seven_price_4)
+            form_data.append("nobrand_price_1", nobrand_price_1)
+            form_data.append("nobrand_price_4", nobrand_price_4)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/writing",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.href = '/'
+                }
+            });
+        }
     </script>
 </head>
 
 <body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+        <div class="logo">
+            <h1 class="text-light"><a href="/">캔을 Beer!</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+    </div>
+</header><!-- End Header -->
+
 <div class="wrap">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -190,7 +210,9 @@
                 <br><br><br><br>
                 <div class="beer-name">
                     <label>맥주 이름을 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-name" placeholder="제품명">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
+                    </div>
                 </div>
                 <br><br>
                 <div class="beer-type">
@@ -207,12 +229,16 @@
                 <br><br>
                 <div class="form-group">
                     <label>맥주 제조사를 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-company" placeholder="제조사 이름">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
+                    </div>
                 </div>
                 <br><br>
                 <div class="form-group">
                     <label>맥주 제조국를 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-country" placeholder="제조국 입력">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
+                    </div>
                 </div>
                 <br><br>
                 <div class="form-group">
@@ -221,38 +247,41 @@
                 </div>
                 <div class="form-group">
                     <label>미니스톱에서 파나요?</label>
-                    <input type="text" class="form-control" id="mini-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="mini-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>GS25에서 파나요?</label>
-                    <input type="text" class="form-control" id="GS-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="GS-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>CU에서 파나요?</label>
-                    <input type="text" class="form-control" id="CU-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="CU-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>세븐일레븐에서 파나요?</label>
-                    <input type="text" class="form-control" id="seven-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="seven-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>노브랜드에서 파나요?</label>
-                    <input type="text" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 
-                <button onclick="posting_new()" type="submit" class="btn btn-primary">작성하기</button>
-
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success" onclick="posting_new()" >작성하기</button>
+                </div>
+                <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+                    <i class="bi bi-arrow-up-short"></i></a>
             </div>
         </div>
     </div>
