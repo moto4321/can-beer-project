@@ -25,7 +25,7 @@ def home():
             row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
             row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
 
-        # 맥주별 리뷰를 조회해서 평균값을 맥주 리스트에 추가
+        # 맥주별 리뷰를 조회해서 별점 평균값을 맥주 리스트에 추가
         review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
         sum_star = 0
         if len(review_list) != 0:
@@ -33,6 +33,14 @@ def home():
                 sum_star += review_row['star']
 
             row['star_point'] = round(sum_star / len(review_list), 1)
+
+        # 맥주 출시일과 오늘간 날짜를 비교하여 신상품 여부를 맥주 리스트에 추가
+        beer_date = datetime.strptime(row['beer_date'], '%Y-%m-%d')
+        diff_date = datetime.today() - beer_date
+        if diff_date.days <= 30:
+            row['new_beer'] = True
+        else:
+            row['new_beer'] = False
 
     return render_template('index.html', content_list=content_list)
 

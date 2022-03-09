@@ -74,6 +74,9 @@
                         <img src="/static/{{ row.file }}"
                              class="card-img-top">
                         <div class="card-body">
+                            {% if row.new_beer %}
+                                <p>신상품</p>
+                            {%  endif %}
                             <h5 class="card-title">{{ row.beer_name }}</h5>
                             <p>{{ row.star_point }}</p>
                             <p>{{ row.beer_type }}</p>
