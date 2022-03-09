@@ -119,6 +119,16 @@ def beer_detail(beer_num):
     # print(beer_num)
     detail = db.content.find_one({'beer_num': int(beer_num)}, {'_id': False})
     reviews = list(db.review.find({'beer_num':int(beer_num), 'deleted': 0}, {'_id': False}))
+    # print(reviews["star"])
+    star_amt = 0
+    star_avg = 0
+    if len(reviews) != 0:
+        for review in reviews:
+            star_amt += review['star']
+        star_avg = round(star_amt / len(reviews), 1)
+    else:
+        star_avg = 0
+
 
     # 현재 접속되어있는 사용자
     try:
@@ -131,7 +141,8 @@ def beer_detail(beer_num):
         'detailPage.html',
         detail=detail,
         reviews=reviews,
-        beer_num=beer_num
+        beer_num=beer_num,
+        star_avg=star_avg
     )
 
     # print(reviews)
@@ -140,7 +151,8 @@ def beer_detail(beer_num):
         detail=detail,
         reviews=reviews,
         beer_num=beer_num,
-        current_id=current_id
+        current_id=current_id,
+        star_avg=star_avg
     )
 
 
@@ -288,8 +300,11 @@ def api_login():
     #         return jsonify({'msg': '아이디 사용 가능'})
 
 
-
+@app.route('/update/detail', methods=['POST'])
+def update_post():
+    beer_num = request.form['beer_num']
+    beer_detail = db.content.find_one({'beer_num': beer_num}, {'_id': False})
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=5000, debug=True)
+   app.run('0.0.0.0', port=3001, debug=True)

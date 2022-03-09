@@ -115,6 +115,20 @@
             })
         }
 
+        function update_post() {
+            {#console.log({{ beer_num }})#}
+            $.ajax({
+                type: 'POST',
+                url: 'update/detail',
+                data: {
+                    beer_num: {{ beer_num }}
+                },
+                success: function (response) {
+
+                }
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -132,9 +146,11 @@
                     <p class="card-text">타입 : {{ detail.beer_type }}</p>
                     <p class="card-text">제조사 : {{ detail.beer_company }}</p>
                     <p class="card-text">제조국 : {{ detail.country }}</p>
+                    <p class="card-text">⭐별점⭐  : {{ star_avg }}점!</p>
                     {% for price in detail.price %}
                         <p class="card-text">{{ price.store }} 에서 1개에 {{ price.one }}원 4개에 {{ price.four }}원</p>
                     {% endfor %}
+
                 </div>
             </div>
         </div>
