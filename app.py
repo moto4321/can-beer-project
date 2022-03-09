@@ -3,12 +3,8 @@ app = Flask(__name__)
 import os
 from pymongo import MongoClient
 import certifi
-<<<<<<< HEAD
-#from datetime import datetime  # 파일명 생성을 위한 datetime 라이브러리 사용
-import datetime
-=======
 from datetime import datetime, timedelta # 파일명 생성을 위한 datetime 라이브러리 사용
->>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
+#from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
 ca = certifi.where()
 #client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
@@ -22,14 +18,21 @@ import hashlib
 
 @app.route('/')
 def home():
-    # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
-    # 맥주별 최저가를 구해서 리스트에 추가
     for row in content_list:
-        print(row['price'])
         row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
         row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
+        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
+
+        sum_star = 0
+        if len(review_list) != 0:
+            for review_row in review_list:
+                sum_star += review_row['star']
+
+        row['star_point'] = round(sum_star / len(review_list), 1)
+        # print('sum star', sum_star)
+        # print('avg star', round(sum_star / len(review_list), 1))
 
     return render_template('index.html', content_list=content_list)
 
@@ -43,6 +46,20 @@ def save_beer():
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
     beer_date= request.form['beer_date']
+    #가격정보 전부 가져오기
+    mini_price_1 = request.form['mini_price_1']
+    mini_price_4 = request.form['mini_price_1']
+    gs_price_1 = request.form['gs_price_1']
+    gs_price_4 = request.form['gs_price_4']
+    cu_price_1 = request.form['cu_price_1']
+    cu_price_4 = request.form['cu_price_4']
+    seven_price_1 = request.form['seven_price_1']
+    seven_price_4 = request.form['seven_price_4']
+    nobrand_price_1 = request.form['nobrand_price_1']
+    nobrand_price_4 = request.form['nobrand_price_4']
+
+    dic_temp = [{'store':'CU'},{'one':cu_price_1},{'four':cu_price_4},{'store':'mini'},{'one':mini_price_1},{'four':mini_price_4},{'store':'gs'},{'one':gs_price_1},{'four':gs_price_4},{'store':'nobrand'},{'one':nobrand_price_1},{'four':nobrand_price_4},{'store':'seven'},{'one':seven_price_1},{'four':seven_price_4}]
+
 
     #밑쪽으로는 파일 저장하기
     file = request.files["file_give"]
@@ -60,7 +77,8 @@ def save_beer():
         'beer_type':beer_type,
         'beer_company':beer_company,
         'beer_date':beer_date,
-        'file':f'{filename}.{extantion}'
+        'file':f'{filename}.{extantion}',
+        'price':dic_temp
     }
     db.content.insert_one(doc)
 
@@ -123,27 +141,21 @@ def post_review():
 @app.route('/remove/review', methods=["POST"])
 def delete_review():
     review_num = request.form["review_num"]
-<<<<<<< HEAD
-=======
+
     print(review_num)
 
     # db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
     # return jsonify({'msg': '삭제완료'})
->>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
 
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
     writer = db.review.find_one({'id':userinfo['id']})
-<<<<<<< HEAD
+
     print(userinfo)
     print(writer)
-    if userinfo['id'] == writer:
-=======
-
 
     if userinfo['id'] == writer['id']:
->>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
         db.review.update_one({'review_num': int(review_num)}, {'$set': {'deleted': 1}})
         return jsonify({'msg': '삭제완료'})
     else:
@@ -152,23 +164,6 @@ def delete_review():
 
 
 
-<<<<<<< HEAD
-    # # 유저 정보 확인
-    # @app.route('/api/detailPage', methods=['GET'])
-    # def api_valid():
-    #     token_receive = request.cookies.get('mytoken')
-    #     try:
-    #         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    #         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
-    #         # 그리고 유저정보의 id 를 꺼내는 과정
-    #         userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-    #         #return jsonify({'result': 'success', 'id': userinfo['id']})
-    #         return render_template('detailPage.html', id=userinfo["id"])
-    #     except jwt.ExpiredSignatureError:
-    #         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    #     except jwt.exceptions.DecodeError:
-    #         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-=======
 # 유저 정보 확인
 @app.route('/api/detailPage', methods=['GET'])
 def api_valid():
@@ -184,7 +179,7 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
->>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
+
 
 
 @app.route('/login')
@@ -240,12 +235,8 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-<<<<<<< HEAD
-            'exp': datetime.datetime.now() + datetime.timedelta(seconds=60 * 60 * 24)
-=======
             # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
->>>>>>> 77cd9289f9e7d15d2b3ebd085b31bbc23515b19d
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
