@@ -20,14 +20,11 @@ import hashlib
 # 메인 페이지
 @app.route('/')
 def home():
-<<<<<<< HEAD
-=======
     # 토큰 확인
     token_receive = request.cookies.get('mytoken')
     isLogin = False
     if token_receive is not None:
         isLogin = True
->>>>>>> d3b543f034d9a3b3cecbfb4a2bf58ff0c70a2cef
 
     # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
@@ -96,15 +93,15 @@ def home():
     return render_template('index.html', content_list=content_list, isLogin=isLogin)
 
 
-@app.route('/api/index', methods=['GET'])
-def check_login():
-    token_receive = request.cookies.get('mytoken')
-    if token_receive is not None:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-        return jsonify({'id': userinfo['id']})
-    else:
-        return jsonify({'fail':'fail'})
+# @app.route('/api/index', methods=['GET'])
+# def check_login():
+#     token_receive = request.cookies.get('mytoken')
+#     if token_receive is not None:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#         userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+#         return jsonify({'id': userinfo['id']})
+#     else:
+#         return jsonify({'fail':'fail'})
 
 
 

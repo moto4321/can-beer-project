@@ -54,97 +54,6 @@
         function fnAlign(){
             window.location.href="/?align_type=" + $("#align-type").val()
         }
-<<<<<<< HEAD
-
-        .title {
-            width: 100%;
-            height: 250px;
-
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://mblogthumb-phinf.pstatic.net/20130626_3/ttl1125ejr_1372227070451EIL5b_JPEG/%BE%CB%B7%CF%B4%DE%B7%CF.jpg?type=w2');
-            background-position: center;
-            background-size: cover;
-
-            color: white;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .title > div> button {
-            width: 200px;
-            height: 50px;
-
-            background-color: transparent;
-            color: white;
-
-            border-radius: 50px;
-            border: 1px solid white;
-
-            margin-top: 10px;
-        }
-
-        .title > div> button:hover {
-            border: 2px solid white;
-        }
-
-        .list {
-            margin: 20px auto 0px auto;
-            width: 95%;
-            max-width: 1200px;
-        }
-        .see{
-            display: block;
-        }
-        .hide{
-            display: none;
-        }
-    </style>
-     <script>
-            function logout() {
-                $.removeCookie('mytoken', {path: '/'});
-                alert('로그아웃 완료!')
-                window.location.href = "/"
-            }
-
-            $(document).ready(function () {
-                check_login()
-            });
-
-            function check_login(){
-                $.ajax({
-                    type: "GET",
-                    url: "/api/index",
-                    data: {},
-                    success: function (response) {
-                        alert(response['id'])
-                        if (response['id'] == undefined || null) {
-                            $(".login").removeClass("hide").addClass("see")
-                            $(".logout").removeClass("see").addClass("hide")
-                        }else {
-                            $(".logout").removeClass("hide").addClass("see")
-                            $(".login").removeClass("see").addClass("hide")
-                        }
-                    }
-                })
-            }
-
-    </script>
-</head>
-<body>
-    <div class="title">
-        <h1>캔을 Beer!</h1>
-                <div class="login see hide">
-                    <button onclick="window.location.href='/layout_writing'">신상등록</button>
-                    <button class="login" onclick="window.location.href='/login'">로그인</button>
-                    <button class="login" onclick="window.location.href='/register'">회원가입</button>
-                </div>
-                <div class="logout see hide">
-                    <button onclick="window.location.href='/layout_writing'">신상등록</button>
-                    <button class="logout" onclick="logout()">로그아웃</button>
-                </div>
-=======
     </script>
 </head>
 <body>
@@ -171,7 +80,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
->>>>>>> d3b543f034d9a3b3cecbfb4a2bf58ff0c70a2cef
+
     </div>
 </header><!-- End Header -->
 
