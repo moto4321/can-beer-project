@@ -50,57 +50,61 @@
         $(document).ready(function () {
             bsCustomFileInput.init()
         })
+
+
+
         function posting_new() {
-                let beer_name = $("#beer-name").val()
-                let beer_type = $("#beer-type").val()
-                let beer_company = $("#beer-company").val()
-                let beer_country = $("#beer-country").val()
-                let beer_date = $("#beer-date").val()
-                let mini_price_1 = $("#mini-price-1").val()
-                let mini_price_4 = $("#mini-price-4").val()
-                let gs_price_1 = $("#GS-price-1").val()
-                let gs_price_4 = $("#GS-price-4").val()
-                let cu_price_1 = $("#CU-price-1").val()
-                let cu_price_4 = $("#CU-price-4").val()
-                let seven_price_1 = $("#seven-price-1").val()
-                let seven_price_4 = $("#seven-price-4").val()
-                let nobrand_price_1 = $("#nobrand-price-1").val()
-                let nobrand_price_4 = $("#nobrand-price-4").val()
-
-                let file = $("#file")[0].files[0]
-                let form_data = new FormData()
-
-                form_data.append("file_give", file)
-                form_data.append("beer_name", beer_name)
-                form_data.append("beer_type", beer_type)
-                form_data.append("beer_company", beer_company)
-                form_data.append("beer_country", beer_country)
-                form_data.append("beer_date", beer_date)
-                form_data.append("mini_price_1", mini_price_1)
-                form_data.append("mini_price_4", mini_price_4)
-                form_data.append("gs_price_1", gs_price_1)
-                form_data.append("gs_price_4", gs_price_4)
-                form_data.append("cu_price_1", cu_price_1)
-                form_data.append("cu_price_4", cu_price_4)
-                form_data.append("seven_price_1", seven_price_1)
-                form_data.append("seven_price_4", seven_price_4)
-                form_data.append("nobrand_price_1", nobrand_price_1)
-                form_data.append("nobrand_price_4", nobrand_price_4)
+            let beer_name = $("#beer-name").val()
+            let beer_type = $("#beer-type").val()
+            let beer_company = $("#beer-company").val()
+            let beer_country = $("#beer-country").val()
+            let beer_date = $("#beer-date").val()
+            let mini_price_1 = $("#mini-price-1").val()
+            let mini_price_4 = $("#mini-price-4").val()
+            let gs_price_1 = $("#GS-price-1").val()
+            let gs_price_4 = $("#GS-price-4").val()
+            let cu_price_1 = $("#CU-price-1").val()
+            let cu_price_4 = $("#CU-price-4").val()
+            let seven_price_1 = $("#seven-price-1").val()
+            let seven_price_4 = $("#seven-price-4").val()
+            let nobrand_price_1 = $("#nobrand-price-1").val()
+            let nobrand_price_4 = $("#nobrand-price-4").val()
 
 
-                $.ajax({
-                    type: "POST",
-                    url: "/api/writing",
-                    data: form_data,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        alert(response["msg"])
-                        window.location.reload()
-                    }
-                });
-            }
+            let file = $("#file")[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("beer_name", beer_name)
+            form_data.append("beer_type", beer_type)
+            form_data.append("beer_company", beer_company)
+            form_data.append("beer_country", beer_country)
+            form_data.append("beer_date", beer_date)
+            form_data.append("mini_price_1", mini_price_1)
+            form_data.append("mini_price_4", mini_price_4)
+            form_data.append("gs_price_1", gs_price_1)
+            form_data.append("gs_price_4", gs_price_4)
+            form_data.append("cu_price_1", cu_price_1)
+            form_data.append("cu_price_4", cu_price_4)
+            form_data.append("seven_price_1", seven_price_1)
+            form_data.append("seven_price_4", seven_price_4)
+            form_data.append("nobrand_price_1", nobrand_price_1)
+            form_data.append("nobrand_price_4", nobrand_price_4)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/writing",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.href = '/'
+                }
+            });
+        }
     </script>
 </head>
 
@@ -148,33 +152,33 @@
                 </div>
                 <div class="form-group">
                     <label>미니스톱에서 파나요?</label>
-                    <input type="text" class="form-control" id="mini-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="mini-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>GS25에서 파나요?</label>
-                    <input type="text" class="form-control" id="GS-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="GS-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>CU에서 파나요?</label>
-                    <input type="text" class="form-control" id="CU-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="CU-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>세븐일레븐에서 파나요?</label>
-                    <input type="text" class="form-control" id="seven-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="seven-price-4" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                     <label>노브랜드에서 파나요?</label>
-                    <input type="text" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
+                    <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="text" class="form-control" id="nobrand-price-1" placeholder="4개당 가격"
+                    <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 
