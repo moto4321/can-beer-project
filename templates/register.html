@@ -16,18 +16,24 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-        <!--폰트-->
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
         <style>
-            * {
-                font-family: 'Nanum Pen Script', cursive;
-                font-size: large;
-            }
             .box{
-                max-width: 500px;
+                font-weight: 400;
+                color: rgb(33, 37, 41);
+                max-width: 1000px;
                 width: 95%;
                 margin: 100px auto 0 auto;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 24px 0px;
+                padding: 30px;
+            }
+            .input{
+                border-radius: 0px;
+            }
+            input:active{
+                border-color: #25cff2;
+                border-size: 1px;
+                box-shadow: none;
             }
             .footer{
                 margin-top: 100px;
@@ -44,10 +50,31 @@
             .iddiv{
                 display: flex;
                 flex-flow: row;
+                justify-content: space-between;
             }
-            .is-light{
+            .iddiv > .red-btn{
+                border-radius: 0px;
+            }
+            .iddiv > .input{
+                width: 82%;
+            }
+            .field{
+                margin-bottom: 30px;
+            }
+            .label{
+                color: white;
+                font-size: 1px;
+            }
+            .red-btn{
                 margin-left: 10px;
             }
+            .lastdiv{
+                text-align: center;
+            }
+            button:hover {
+                background: rgb(253, 92, 40);
+            }
+
         </style>
 
 
@@ -99,7 +126,6 @@
                 let pw = $('#userpw').val()
                 let pw2 = $('#userpw2').val()
                 let id = $('#userid').val()
-                //let c = document.getElementById('res');
                 if(id == ''){
                     alert("아이디를 입력해주세요.");
                 } else if (pw == '' || pw2 == '') {
@@ -128,10 +154,9 @@
         <div class="wrap">
             <div class="box">
                 <div class="field">
-                    <label class="label">ID</label>
                     <div class="control iddiv">
-                    <input id="userid" class="input" type="text" placeholder="아이디를 입력해주세요">
-                    <button class="button is-danger is-light" onclick="check_dup()">아이디 중복확인</button>
+                    <input id="userid" class="input" type="text" placeholder="ID">
+                    <button class="button is-danger is-outlined" onclick="check_dup()">아이디 중복확인</button>
                     </div>
                 </div>
                 <div class="field">
@@ -140,31 +165,36 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Password</label>
+                    <label class="label">안보임/공간차지</label>
                     <div class="control">
-                    <input id="userpw" class="input" type="password" placeholder="********">
+                    <input id="userpw" class="input" type="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Password check</label>
+                    <label class="label">blank</label>
                     <div class="control">
-                    <input id="userpw2" class="input" type="password" placeholder="********">
+                    <input id="userpw2" class="input" type="password" placeholder="Password check">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Name</label>
+                    <label class="label">blank</label>
                     <div class="control">
-                    <input id="username" class="input" type="text">
+                    <input id="username" class="input" type="text" placeholder="Name">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Phone</label>
+                    <label class="label">blank</label>
                     <div class="control">
-                    <input id="userphone" class="input" type="text" placeholder="000-0000-0000">
+                    <input id="userphone" class="input" type="text" placeholder="Phone number">
                     </div>
                 </div>
-                <button class="button is-warning" onclick="history.back()">뒤로가기</button>
-                <button class="button is-primary" onclick="check_input()">회원가입</button>
+                <div class="field">
+                    <label class="label">blank</label>
+                    <div class="control lastdiv">
+                    <button class="button is-danger is-outlined" onclick="history.back()">뒤로가기</button>
+                    <button class="button is-danger red-btn" onclick="check_input()">회원가입</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -177,6 +207,7 @@
                 </p>
             </div>
         </footer>
+
 
     </body>
 </html>
