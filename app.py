@@ -18,6 +18,7 @@ import hashlib
 # 메인 페이지
 @app.route('/')
 def home():
+
     # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
@@ -45,6 +46,20 @@ def home():
             row['new_beer'] = False
 
     return render_template('index.html', content_list=content_list)
+
+
+@app.route('/api/index', methods=['GET'])
+def check_login():
+    token_receive = request.cookies.get('mytoken')
+    if token_receive is not None:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
+        return jsonify({'id': userinfo['id']})
+    else:
+        return jsonify({'fail':'fail'})
+
+
+
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
@@ -262,7 +277,8 @@ def api_login():
         payload = {
             'id': id_receive,
             # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)
-            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
+            #'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
+            'exp': datetime.utcnow() + timedelta(seconds=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
@@ -270,15 +286,13 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
-    # #회원가입시 아이디 중복체크
-    # @app.route('/api/register', methods=['POST'])
-    # def check_id():
-    #     id_receive = request.form['id_give']
-    #     user = db.users.find_one({'id': id_receive})
-    #     if user is not None:  # 유저있으면
-    #         return jsonify({'msg': '아이디 사용 불가'})
-    #     else:
-    #         return jsonify({'msg': '아이디 사용 가능'})
+
+#아이디 중복 레크
+@app.route('/register/check_dup', methods=['POST'])
+def check_dup():
+    userid_receive = request.form['userid_give']
+    exists = bool(db.users.find_one({"id": userid_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 
 @app.route('/update/detail', methods=['POST'])

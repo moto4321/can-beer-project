@@ -35,7 +35,7 @@
             justify-content: center;
         }
 
-        .title > button {
+        .title > div> button {
             width: 200px;
             height: 50px;
 
@@ -48,7 +48,7 @@
             margin-top: 10px;
         }
 
-        .title > button:hover {
+        .title > div> button:hover {
             border: 2px solid white;
         }
 
@@ -57,14 +57,56 @@
             width: 95%;
             max-width: 1200px;
         }
+        .see{
+            display: block;
+        }
+        .hide{
+            display: none;
+        }
     </style>
+     <script>
+            function logout() {
+                $.removeCookie('mytoken', {path: '/'});
+                alert('로그아웃 완료!')
+                window.location.href = "/"
+            }
+
+            $(document).ready(function () {
+                check_login()
+            });
+
+            function check_login(){
+                $.ajax({
+                    type: "GET",
+                    url: "/api/index",
+                    data: {},
+                    success: function (response) {
+                        alert(response['id'])
+                        if (response['id'] == undefined || null) {
+                            $(".login").removeClass("hide").addClass("see")
+                            $(".logout").removeClass("see").addClass("hide")
+                        }else {
+                            $(".logout").removeClass("hide").addClass("see")
+                            $(".login").removeClass("see").addClass("hide")
+                        }
+                    }
+                })
+            }
+
+    </script>
 </head>
 <body>
     <div class="title">
         <h1>캔을 Beer!</h1>
-        <button onclick="window.location.href='/layout_writing'">신상등록</button>
-        <button onclick="window.location.href='/login'">로그인</button>
-        <button onclick="window.location.href='/register'">회원가입</button>
+                <div class="login see hide">
+                    <button onclick="window.location.href='/layout_writing'">신상등록</button>
+                    <button class="login" onclick="window.location.href='/login'">로그인</button>
+                    <button class="login" onclick="window.location.href='/register'">회원가입</button>
+                </div>
+                <div class="logout see hide">
+                    <button onclick="window.location.href='/layout_writing'">신상등록</button>
+                    <button class="logout" onclick="logout()">로그아웃</button>
+                </div>
     </div>
     <div class="list">
         <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
