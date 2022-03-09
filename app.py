@@ -45,8 +45,12 @@ def home():
         else:
             row['new_beer'] = False
 
+    if 'align_type' in request.args:
+        align_type = int(request.args.get('align_type'))
+    else:
+        align_type = 0
+
     # 맥주 정렬
-    align_type = int(request.args.get('align_type'))
     # 0 : 기본 정렬
     if align_type == 0:
         content_list = content_list
