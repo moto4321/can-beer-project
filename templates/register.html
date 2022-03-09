@@ -16,14 +16,37 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+        <!--폰트-->
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
         <style>
             * {
-                font-family: 'Gowun Dodum', sans-serif;
+                font-family: 'Nanum Pen Script', cursive;
+                font-size: large;
             }
             .box{
                 max-width: 500px;
                 width: 95%;
-                margin: 50px auto 0 auto;
+                margin: 100px auto 0 auto;
+            }
+            .footer{
+                margin-top: 100px;
+            }
+            .title, .subtitle {
+                text-align: center;
+            }
+            .green{
+                color: mediumseagreen;
+            }
+            .red{
+                color: red;
+            }
+            .iddiv{
+                display: flex;
+                flex-flow: row;
+            }
+            .is-light{
+                margin-left: 10px;
             }
         </style>
 
@@ -51,40 +74,47 @@
                 })
             }
 
-         {#   //아이디 중복체크#}
-         {#function check_id() {#}
-         {#    let id = $('#id').val()#}
-         {#    $.ajax({#}
-         {#        type: "POST",#}
-         {#        url: "/api/register",#}
-         {#        data: {id_give:id},#}
-         {#        success: function (response) {#}
-         {#            $('#res').append('msg');#}
-         {#            window.location.reload()#}
-         {#        }#}
-         {#    })#}
-         {#}#}
-
-
-        function check_input() {
-            let pw = $('#userpw').val()
-            let pw2 = $('#userpw2').val()
-            let id = $('#userid').val()
-            //let c = document.getElementById('res');
-            if(id == ''){
-                alert("아이디를 입력해주세요.");
-            } else if (pw == '' || pw2 == '') {
-                alert("비밀번호를 입력해주세요.");
-            } else if (pw != pw2 ) {
-                alert("비밀번호를 확인해주세요.");
-                pw = "";
-                pw2 = "";
-            } else if (pw.length < 8 ) {
-                alert("비밀번호를 8자리 이상 입력해주세요.");
-            } else {
-                register();
-            }
+            //아이디 중복체크
+         function check_dup() {
+            let userid = $("#userid").val()
+            $.ajax({
+                type: "POST",
+                url: "/register/check_dup",
+                data: {
+                    userid_give: userid
+                },
+                success: function (response) {
+                    if (response["exists"]) {
+                        $("#res").text("이미 존재하는 아이디입니다.").removeClass("green").addClass("red")
+                        $("#userid").focus()
+                    } else {
+                        $("#res").text("사용할 수 있는 아이디입니다.").removeClass("red").addClass("green")
+                    }
+                }
+            })
         }
+
+
+            function check_input() {
+                let pw = $('#userpw').val()
+                let pw2 = $('#userpw2').val()
+                let id = $('#userid').val()
+                //let c = document.getElementById('res');
+                if(id == ''){
+                    alert("아이디를 입력해주세요.");
+                } else if (pw == '' || pw2 == '') {
+                    alert("비밀번호를 입력해주세요.");
+                } else if (pw != pw2 ) {
+                    alert("비밀번호를 확인해주세요.");
+                    pw = "";
+                    pw2 = "";
+                } else if (pw.length < 8 ) {
+                    alert("비밀번호를 8자리 이상 입력해주세요.");
+                } else {
+                    register();
+                }
+            }
+
         </script>
     </head>
     <body>
@@ -99,11 +129,16 @@
             <div class="box">
                 <div class="field">
                     <label class="label">ID</label>
-                    <div class="control">
+                    <div class="control iddiv">
                     <input id="userid" class="input" type="text" placeholder="아이디를 입력해주세요">
+                    <button class="button is-danger is-light" onclick="check_dup()">아이디 중복확인</button>
                     </div>
                 </div>
-{#                <div class="field" id="res" placeholder="중복을 확인해주세요"><div class="control"></div></div><button onclick="check_id()">아이디 중복체크</button>#}
+                <div class="field">
+                    <div class="control">
+                        <div id="res" placeholder="아이디 중복을 확인해주세요"></div>
+                    </div>
+                </div>
                 <div class="field">
                     <label class="label">Password</label>
                     <div class="control">
@@ -128,8 +163,20 @@
                     <input id="userphone" class="input" type="text" placeholder="000-0000-0000">
                     </div>
                 </div>
+                <button class="button is-warning" onclick="history.back()">뒤로가기</button>
                 <button class="button is-primary" onclick="check_input()">회원가입</button>
             </div>
         </div>
+
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>캔을 Bear!</strong> by <a href="https://jgthms.com">sparta 3group</a>. The source code is licensed
+                    <a href="http://opensource.org/licenses/mit-license.php">Bulma</a>. The website content
+                    is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Hanghae99</a>.
+                </p>
+            </div>
+        </footer>
+
     </body>
 </html>
