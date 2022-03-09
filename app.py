@@ -3,7 +3,7 @@ app = Flask(__name__)
 import os
 from pymongo import MongoClient
 import certifi
-from datetime import datetime, timedelta # 파일명 생성을 위한 datetime 라이브러리 사용
+from datetime import datetime # 파일명 생성을 위한 datetime 라이브러리 사용
 ca = certifi.where()
 #client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.g33mv.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
@@ -17,14 +17,21 @@ import hashlib
 
 @app.route('/')
 def home():
-    # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
-    # 맥주별 최저가를 구해서 리스트에 추가
     for row in content_list:
-        print(row['price'])
         row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
         row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
+        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
+
+        sum_star = 0
+        if len(review_list) != 0:
+            for review_row in review_list:
+                sum_star += review_row['star']
+
+        row['star_point'] = round(sum_star / len(review_list), 1)
+        # print('sum star', sum_star)
+        # print('avg star', round(sum_star / len(review_list), 1))
 
     return render_template('index.html', content_list=content_list)
 
@@ -38,6 +45,20 @@ def save_beer():
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
     beer_date= request.form['beer_date']
+    #가격정보 전부 가져오기
+    mini_price_1 = request.form['mini_price_1']
+    mini_price_4 = request.form['mini_price_1']
+    gs_price_1 = request.form['gs_price_1']
+    gs_price_4 = request.form['gs_price_4']
+    cu_price_1 = request.form['cu_price_1']
+    cu_price_4 = request.form['cu_price_4']
+    seven_price_1 = request.form['seven_price_1']
+    seven_price_4 = request.form['seven_price_4']
+    nobrand_price_1 = request.form['nobrand_price_1']
+    nobrand_price_4 = request.form['nobrand_price_4']
+
+    dic_temp = [{'store':'CU'},{'one':cu_price_1},{'four':cu_price_4},{'store':'mini'},{'one':mini_price_1},{'four':mini_price_4},{'store':'gs'},{'one':gs_price_1},{'four':gs_price_4},{'store':'nobrand'},{'one':nobrand_price_1},{'four':nobrand_price_4},{'store':'seven'},{'one':seven_price_1},{'four':seven_price_4}]
+
 
     #밑쪽으로는 파일 저장하기
     file = request.files["file_give"]
@@ -55,7 +76,8 @@ def save_beer():
         'beer_type':beer_type,
         'beer_company':beer_company,
         'beer_date':beer_date,
-        'file':f'{filename}.{extantion}'
+        'file':f'{filename}.{extantion}',
+        'price':dic_temp
     }
     db.content.insert_one(doc)
 
