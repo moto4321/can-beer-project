@@ -355,7 +355,6 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 
 
-
 # @app.route('/update/detail', methods=["POST"])
 # def update_post():
 #     beer_num = request.form['beer_num']

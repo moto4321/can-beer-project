@@ -56,11 +56,12 @@
     <link href="static/assets/css/style.css" rel="stylesheet">
     <script>
 
+        let beer_num = ''
+
         $(document).ready(function () {
 
             bsCustomFileInput.init()
             // console.log(decodeURI(window.location.search))
-
             let updateState = false
             let len = decodeURI(window.location.search).length
             let temp = decodeURI(window.location.search).substr(1, len - 1)
@@ -69,6 +70,10 @@
             for (let i = 0; i < arr.length; i++) {
                 result.push(arr[i].split("="))
             }
+
+            let beer_num = result[4][1]
+
+            // beer_num이 없다면 새로운 content 생성
             if (result[4][1] !== '') {
                 updateState = true
             }
@@ -169,6 +174,7 @@
             form_data.append("seven_price_4", seven_price_4)
             form_data.append("nobrand_price_1", nobrand_price_1)
             form_data.append("nobrand_price_4", nobrand_price_4)
+            form_date.append("beer_num", beer_num)
 
 
             $.ajax({
