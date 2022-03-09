@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
-<meta charset="UTF-8">
+
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,6 +39,12 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -48,12 +55,62 @@
     <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-{#        .container {#}
-{#            padding-left: 50px;#}
-{#        }#}
     </style>
     <!-- Template Main CSS File -->
-    <link href="static/assets/css/style.css" rel="stylesheet">
+    <style>
+
+        header {
+            height: 70px;
+            transition: all 0.5s;
+            z-index: 997;
+            transition: all 0.5s;
+            background: #fff;
+        }
+
+        header.fixed-top {
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo h1 {
+            font-size: 28px;
+            margin: 0;
+            padding: 10px 0;
+            line-height: 1;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        header .logo h1 a, header .logo h1 a:hover {
+            color: #2b2320;
+            text-decoration: none;
+        }
+
+        header .logo img {
+            padding: 0;
+            margin: 0;
+            max-height: 40px;
+        }
+
+
+        .wrap {
+
+            width: 600px;
+            margin-top: 20px;
+            margin: auto;
+            font-family: 'Stylish', sans-serif;
+            padding: 50px 40px 20px 20px;
+            text-align: center;
+
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+
+    </style>
+
     <script>
 
         let beer_num = ''
@@ -66,7 +123,7 @@
             let len = decodeURI(window.location.search).length
             let temp = decodeURI(window.location.search).substr(1, len - 1)
             let arr = temp.split("&")
-            let result =[]
+            let result = []
             for (let i = 0; i < arr.length; i++) {
                 result.push(arr[i].split("="))
             }
@@ -98,12 +155,12 @@
 
             }
             let one = []
-            for (let i =0; i  < bb.length; i++) {
+            for (let i = 0; i < bb.length; i++) {
                 one.push(bb[i].split("%"))
             }
 
             let four = []
-            for (let i = 0;  i < aa.length; i++) {
+            for (let i = 0; i < aa.length; i++) {
                 let last = aa[i][5].substr(0, aa[i][5].length - 1)
                 {#let last = aa[i][5]#}
                 four.push(last)
@@ -131,7 +188,6 @@
                     $("#seven-price-4").val(four[i - 5])
                 }
             }
-
 
 
         })
@@ -205,92 +261,83 @@
 </header><!-- End Header -->
 
 <div class="wrap">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1>새로운 맥주를 등록합니다.</h1>
-            <div class="posting-box">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file">
-                    <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
-                </div>
-                <br><br><br><br>
-                <div class="beer-name">
-                    <label>맥주 이름을 입력해주세요</label>
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
-                    </div>
-                </div>
-                <br><br>
-                <div class="beer-type">
-                    <label>맥주 종류를 입력해주세요</label>
-                    <select class="form-control" id="beer-type">
-                        <option>----맥주 종류를 선택해주세요----</option>
-                        <option>에일</option>
-                        <option>포터/스카우트</option>
-                        <option>밀맥주</option>
-                        <option>라거</option>
-                        <option>발포주</option>
-                    </select>
-                </div>
-                <br><br>
-                <div class="form-group">
-                    <label>맥주 제조사를 입력해주세요</label>
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
-                    </div>
-                </div>
-                <br><br>
-                <div class="form-group">
-                    <label>맥주 제조국를 입력해주세요</label>
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
-                    </div>
-                </div>
-                <br><br>
-                <div class="form-group">
-                    <label>맥주 제조날짜</label>
-                    <p><input type="date" id="beer-date"></p>
-                </div>
-                <div class="form-group">
-                    <label>미니스톱에서 파나요?</label>
-                    <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
-                    <label>GS25에서 파나요?</label>
-                    <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>CU에서 파나요?</label>
-                    <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>세븐일레븐에서 파나요?</label>
-                    <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
-                    <label>노브랜드에서 파나요?</label>
-                    <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                </div>
-
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-success" onclick="posting_new()" >작성하기</button>
-                </div>
-                <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-                    <i class="bi bi-arrow-up-short"></i></a>
+    <h1>새로운 맥주를 등록합니다.</h1>
+    <br>
+    <div class="container">
+        <div class="posting-box" id="question">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file">
+                <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
             </div>
+            <div class="beer-name">
+                <label>맥주 이름을 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
+            </div>
+            <div class="beer-type">
+                <label>맥주 종류를 입력해주세요</label>
+                <select class="form-control" id="beer-type">
+                    <option>----맥주 종류를 선택해주세요----</option>
+                    <option>에일</option>
+                    <option>포터/스카우트</option>
+                    <option>밀맥주</option>
+                    <option>라거</option>
+                    <option>발포주</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>맥주 제조사를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
+            </div>
+
+            <div class="form-group">
+                <label>맥주 제조국를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
+            </div>
+            <div class="form-group">
+                <label>맥주 제조날짜</label>
+                <p><input type="date" id="beer-date"></p>
+            </div>
+            <div class="form-group">
+                <label>미니스톱에서 파나요?</label>
+                <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>GS25에서 파나요?</label>
+                <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>CU에서 파나요?</label>
+                <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>세븐일레븐에서 파나요?</label>
+                <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                <label>노브랜드에서 파나요?</label>
+                <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-success" onclick="posting_new()">작성하기</button>
+            </div>
+            <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+                <i class="bi bi-arrow-up-short"></i></a>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
