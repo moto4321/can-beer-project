@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 app = Flask(__name__)
 import os
@@ -18,24 +20,33 @@ import hashlib
 # 메인 페이지
 @app.route('/')
 def home():
+<<<<<<< HEAD
+=======
+    # 토큰 확인
+    token_receive = request.cookies.get('mytoken')
+    isLogin = False
+    if token_receive is not None:
+        isLogin = True
+>>>>>>> d3b543f034d9a3b3cecbfb4a2bf58ff0c70a2cef
 
     # 맥주 리스트 조회
     content_list = list(db.content.find({}, {'_id': False}))
 
     # 맥주별 최저가를 구해서 맥주 리스트에 추가
     for row in content_list:
-        if 'price' in row:
-            row['one_min'] = format((min(row['price'], key=(lambda x: x['one'])))['one'], ',')
-            row['four_min'] = format((min(row['price'], key=(lambda x: x['four'])))['four'], ',')
+        row['one_min'] = (min(row['price'], key=(lambda x: x['one'])))['one']
+        row['four_min'] = (min(row['price'], key=(lambda x: x['four'])))['four']
 
         # 맥주별 리뷰를 조회해서 별점 평균값을 맥주 리스트에 추가
-        review_list = list(db.review.find({'beer_num':row['beer_num']}, {'_id': False}))
+        review_list = list(db.review.find({'beer_num': row['beer_num']}, {'_id': False}))
         sum_star = 0
         if len(review_list) != 0:
             for review_row in review_list:
                 sum_star += review_row['star']
 
             row['star_point'] = round(sum_star / len(review_list), 1)
+        else:
+            row['star_point'] = 0
 
         # 맥주 출시일과 오늘간 날짜를 비교하여 신상품 여부를 맥주 리스트에 추가
         beer_date = datetime.strptime(row['beer_date'], '%Y-%m-%d')
@@ -45,7 +56,44 @@ def home():
         else:
             row['new_beer'] = False
 
-    return render_template('index.html', content_list=content_list)
+    if 'align_type' in request.args:
+        align_type = int(request.args.get('align_type'))
+    else:
+        align_type = 0
+
+    # 맥주 정렬
+    # 0 : 기본 정렬
+    if align_type == 0:
+        content_list = content_list
+    # 1 : 최근 상품순
+    elif align_type == 1:
+        content_list = sorted(content_list, key=(lambda x: x['beer_date']))
+    # 2 : 오래된 상품순
+    elif align_type == 2:
+        content_list = sorted(content_list, key=(lambda x: x['beer_date']), reverse=True)
+    # 3 : 1개 가격 낮은순
+    elif align_type == 3:
+        content_list = sorted(content_list, key=(lambda x: x['one_min']))
+    # 4 : 1개 가격 높은순
+    elif align_type == 4:
+        content_list = sorted(content_list, key=(lambda x: x['one_min']), reverse=True)
+    # 5 : 4개 가격 낮은순
+    elif align_type == 5:
+        content_list = sorted(content_list, key=(lambda x: x['four_min']))
+    # 6 : 4개 가격 높은순
+    elif align_type == 6:
+        content_list = sorted(content_list, key=(lambda x: x['four_min']), reverse=True)
+    # 7 : 별점 높은순
+    elif align_type == 7:
+        content_list = sorted(content_list, key=(lambda x: x['star_point']), reverse=True)
+    # 8 : 별점 낮은순
+    elif align_type == 8:
+        content_list = sorted(content_list, key=(lambda x: x['star_point']))
+    # 9 : 랜덤
+    elif align_type == 9:
+        random.shuffle(content_list)
+
+    return render_template('index.html', content_list=content_list, isLogin=isLogin)
 
 
 @app.route('/api/index', methods=['GET'])
@@ -228,6 +276,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/logout')
+def logout():
+    msg = request.args.get("msg")
+    return render_template('logout.html', msg=msg)
 
 @app.route('/register')
 def register():
