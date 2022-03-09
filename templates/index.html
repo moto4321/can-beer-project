@@ -108,7 +108,9 @@
                             {% if row.new_beer %}
                                 <h5>신상품</h5>
                             {% endif %}
-                            <h5>⭐ {{ row.star_point }}</h5>
+                            {% if row.star_point != 0 %}
+                                <h5>⭐ {{ row.star_point }}</h5>
+                            {% endif %}
 
                             <p>제조사 : {{ row.beer_company }}</p>
                             <p>종류 : {{ row.beer_type }}</p>

@@ -34,6 +34,8 @@ def home():
                 sum_star += review_row['star']
 
             row['star_point'] = round(sum_star / len(review_list), 1)
+        else:
+            row['star_point'] = 0
 
         # 맥주 출시일과 오늘간 날짜를 비교하여 신상품 여부를 맥주 리스트에 추가
         beer_date = datetime.strptime(row['beer_date'], '%Y-%m-%d')
