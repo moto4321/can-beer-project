@@ -56,41 +56,47 @@
     <link href="static/assets/css/style.css" rel="stylesheet">
     <script>
 
-        let beer_num = ''
+        {#let beer_num_old = ''#}
+
+
+        let updateState = false
+        console.log(decodeURI(window.location.search))
+        let len = decodeURI(window.location.search).length
+        let temp = decodeURI(window.location.search).substr(1, len - 1)
+        let arr = temp.split("&")
+        let result =[]
+        for (let i = 0; i < arr.length; i++) {
+            result.push(arr[i].split("="))
+        }
+
+        let beer_num_old = result[4][1]
 
         $(document).ready(function () {
 
             bsCustomFileInput.init()
-            // console.log(decodeURI(window.location.search))
-            let updateState = false
-            let len = decodeURI(window.location.search).length
-            let temp = decodeURI(window.location.search).substr(1, len - 1)
-            let arr = temp.split("&")
-            let result =[]
-            for (let i = 0; i < arr.length; i++) {
-                result.push(arr[i].split("="))
-            }
 
-            let beer_num = result[4][1]
 
-            // beer_num이 없다면 새로운 content 생성
+            // beer_num이 있다면 update
             if (result[4][1] !== '') {
                 updateState = true
             }
-            console.log(result)
+            {#console.log(result)#}
 
             $("#beer-name").val(result[0][1])
             $("#beer-type").val(result[1][1])
             $("#beer-company").val(result[2][1])
             $("#beer-country").val(result[3][1])
+            $("#beer-date").val(result[5][1])
 
-            console.log(updateState)
+
+
+            {#console.log(updateState)#}
             let aa = []
-            for (let i = 5; i < result.length; i++) {
+            for (let i = 6; i < result.length; i++) {
                 aa.push(result[i][1].split("+"))
             }
 
-            console.log(aa)
+            {#console.log(aa)#}
 
             let bb = []
             for (let i = 0; i < aa.length; i++) {
@@ -109,26 +115,27 @@
                 four.push(last)
             }
 
-            {#console.log(four)#}
+            console.log(four)
 
 
-            for (let i = 5; i < result.length; i++) {
-                // console.log(result[i])
-                if (result[i][1].includes('GS')) {
-                    $("#GS-price-1").val(one[i - 5][0])
-                    $("#GS-price-4").val(four[i - 5])
-                } else if (result[i][1].includes('NoBrand')) {
-                    $("#nobrand-price-1").val(one[i - 5][0])
-                    $("#nobrand-price-4").val(four[i - 5])
+            for (let i = 6; i < result.length; i++) {
+                console.log(result[i])
+                if (result[i][1].includes('gs')) {
+                    console.log(one[i - 6][0])
+                    $("#GS-price-1").val(one[i - 6][0])
+                    $("#GS-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('nobrand')) {
+                    $("#nobrand-price-1").val(one[i - 6][0])
+                    $("#nobrand-price-4").val(four[i - 6])
                 } else if (result[i][1].includes('CU')) {
-                    $("#CU-price-1").val(one[i - 5][0])
-                    $("#CU-price-4").val(four[i - 5])
-                } else if (result[i][1].includes('MiniStop')) {
-                    $("#mini-price-1").val(one[i - 5][0])
-                    $("#mini-price-4").val(four[i - 5])
+                    $("#CU-price-1").val(one[i - 6][0])
+                    $("#CU-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('mini')) {
+                    $("#mini-price-1").val(one[i - 6][0])
+                    $("#mini-price-4").val(four[i - 6])
                 } else if (result[i][1].includes('seven')) {
-                    $("#seven-price-1").val(one[i - 5][0])
-                    $("#seven-price-4").val(four[i - 5])
+                    $("#seven-price-1").val(one[i - 6][0])
+                    $("#seven-price-4").val(four[i - 6])
                 }
             }
 
@@ -174,7 +181,11 @@
             form_data.append("seven_price_4", seven_price_4)
             form_data.append("nobrand_price_1", nobrand_price_1)
             form_data.append("nobrand_price_4", nobrand_price_4)
-            form_date.append("beer_num", beer_num)
+            if (updateState == true) {
+                form_data.append("beer_num_old", beer_num_old)
+            } else {
+                form_data.append("beer_num_old", 'empty')
+            }
 
 
             $.ajax({

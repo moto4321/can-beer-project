@@ -107,6 +107,17 @@ def save_beer():
             print("빈 문자열 발견")
         return (a)
     content_list = list(db.content.find({}, {'_id': False}))
+
+    # updateState = False
+    beer_num_old = request.form['beer_num_old']
+    print('hello')
+    print(beer_num_old)
+    # 수정페이지에서 온거라면
+    # if beer_num_old != '' or beer_num_old != None or beer_num_old != 'undefined' or beer_num_old != :
+    updateState = True
+
+    if beer_num_old == 'empty':
+        updateState = False
     beer_num = len(content_list)+1
 
     # 페이지에 저장된 형식 저장하기 위해서..
@@ -160,8 +171,22 @@ def save_beer():
         'file':f'{filename}.{extantion}',
         'price':dic_temp
     }
-    db.content.insert_one(doc)
-    return jsonify({'msg': '새 맥주 등록 완료'})
+    update_doc = {
+        'beer_name': beer_name,
+        'beer_type': beer_type,
+        'beer_company': beer_company,
+        'beer_date': beer_date,
+        'beer_country': beer_country,
+        'price': dic_temp
+    }
+    print(updateState) # True??? why
+    print(beer_num_old) # undefined
+    if updateState == True:
+        db.content.update_one({'beer_num':int(beer_num_old)}, {'$set': update_doc})
+        return jsonify({'msg': '맥주 정보 업데이트 완료'})
+    else:
+        db.content.insert_one(doc)
+        return jsonify({'msg': '새 맥주 등록 완료'})
 
 
 # 상품 디테일 페이지 GET라우트 (+ 리뷰 목록까지 가져오기)
