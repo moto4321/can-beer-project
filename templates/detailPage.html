@@ -66,7 +66,8 @@
                 type: 'GET',
                 url: `/detail/${beer_num}`,
                 data: {  },
-                success: function (response) {}
+                success: function (response) {
+                }
             })
         }
 
@@ -117,7 +118,7 @@
     </script>
 </head>
 <body>
-    <h1>Beer detail page</h1>
+    <h1>캔을 Beer!</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
             <div class="card">
@@ -131,6 +132,9 @@
                     <p class="card-text">타입 : {{ detail.beer_type }}</p>
                     <p class="card-text">제조사 : {{ detail.beer_company }}</p>
                     <p class="card-text">제조국 : {{ detail.country }}</p>
+                    {% for price in detail.price %}
+                        <p class="card-text">{{ price.store }} 에서 1개에 {{ price.one }}원 4개에 {{ price.four }}원</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -167,7 +171,7 @@
                     <li>
                         {{ review_one }}
                         {{ star_one }}
-                        {% if review_writer == current_id %}
+                        {% if review_writer == current_id or current_id == None %}
                             <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
                         {% endif %}
                     </li>
