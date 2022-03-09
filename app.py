@@ -118,7 +118,7 @@ def save_beer():
     #가격정보 전부 가져오기
 
     mini_price_1 = int(checking(request.form['mini_price_1']))
-    mini_price_4 = int(checking(request.form['mini_price_1']))
+    mini_price_4 = int(checking(request.form['mini_price_4']))
     gs_price_1 = int(checking(request.form['gs_price_1']))
     gs_price_4 = int(checking(request.form['gs_price_4']))
     cu_price_1 = int(checking(request.form['cu_price_1']))
@@ -161,7 +161,6 @@ def save_beer():
         'price':dic_temp
     }
     db.content.insert_one(doc)
-
     return jsonify({'msg': '새 맥주 등록 완료'})
 
 
