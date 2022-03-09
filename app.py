@@ -100,6 +100,12 @@ def home():
 
 @app.route('/api/writing', methods=['POST'])
 def save_beer():
+    def checking(a):
+        print(a)
+        if a is "":
+            a=0
+            print("빈 문자열 발견")
+        return (a)
     content_list = list(db.content.find({}, {'_id': False}))
     beer_num = len(content_list)+1
 
@@ -108,19 +114,30 @@ def save_beer():
     beer_type = request.form['beer_type']
     beer_company= request.form['beer_company']
     beer_date= request.form['beer_date']
+    beer_country=request.form['beer_country']
     #가격정보 전부 가져오기
-    mini_price_1 = request.form['mini_price_1']
-    mini_price_4 = request.form['mini_price_1']
-    gs_price_1 = request.form['gs_price_1']
-    gs_price_4 = request.form['gs_price_4']
-    cu_price_1 = request.form['cu_price_1']
-    cu_price_4 = request.form['cu_price_4']
-    seven_price_1 = request.form['seven_price_1']
-    seven_price_4 = request.form['seven_price_4']
-    nobrand_price_1 = request.form['nobrand_price_1']
-    nobrand_price_4 = request.form['nobrand_price_4']
 
-    dic_temp = [{'store':'CU'},{'one':cu_price_1},{'four':cu_price_4},{'store':'mini'},{'one':mini_price_1},{'four':mini_price_4},{'store':'gs'},{'one':gs_price_1},{'four':gs_price_4},{'store':'nobrand'},{'one':nobrand_price_1},{'four':nobrand_price_4},{'store':'seven'},{'one':seven_price_1},{'four':seven_price_4}]
+    mini_price_1 = int(checking(request.form['mini_price_1']))
+    mini_price_4 = int(checking(request.form['mini_price_1']))
+    gs_price_1 = int(checking(request.form['gs_price_1']))
+    gs_price_4 = int(checking(request.form['gs_price_4']))
+    cu_price_1 = int(checking(request.form['cu_price_1']))
+    cu_price_4 = int(checking(request.form['cu_price_4']))
+    seven_price_1 = int(checking(request.form['seven_price_1']))
+    seven_price_4 = int(checking(request.form['seven_price_4']))
+    nobrand_price_1 = int(checking(request.form['nobrand_price_1']))
+    nobrand_price_4 = int(checking(request.form['nobrand_price_4']))
+    dic_temp=[]
+    if cu_price_1 != 0:
+        dic_temp.append({'store': 'CU', 'one': cu_price_1, 'four':cu_price_4})
+    if gs_price_1 != 0:
+        dic_temp.append({'store': 'gs', 'one': gs_price_1, 'four':gs_price_4})
+    if seven_price_1 != 0:
+        dic_temp.append({'store': 'seven', 'one': seven_price_1, 'four':seven_price_4})
+    if mini_price_1 != 0:
+        dic_temp.append({'store': 'mini', 'one': mini_price_1, 'four':mini_price_4})
+    if nobrand_price_1 != 0:
+        dic_temp.append({'store': 'nobrand', 'one': nobrand_price_1, 'four':nobrand_price_4})
 
 
     #밑쪽으로는 파일 저장하기
@@ -139,6 +156,7 @@ def save_beer():
         'beer_type':beer_type,
         'beer_company':beer_company,
         'beer_date':beer_date,
+        'beer_country': beer_country,
         'file':f'{filename}.{extantion}',
         'price':dic_temp
     }
@@ -323,7 +341,9 @@ def api_login():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         #token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})
+    # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
