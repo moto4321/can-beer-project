@@ -36,7 +36,7 @@ EC2
 <img alt="Python" src ="https://img.shields.io/badge/AWS-232F3E.svg?&style=for-the-badge&logo=AmazonAWS&logoColor=white"/>
 
 
-#### Tool : 
+Tool :
 Git, Pycharm
 
 
