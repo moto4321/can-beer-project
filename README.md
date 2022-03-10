@@ -16,14 +16,21 @@
 
 # 개발툴
 Server : AWS EC2(Ubuntu)
+
 Framework : Flask (Python)
+
 Database : MongoDB
+
 View : HTML5, CSS3, Javascript
+
 Tool : Git, Pycharm
 
 
 # 팀원
 권민주
+
 기우석
+
 장형원
+
 한상훈
