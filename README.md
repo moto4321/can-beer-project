@@ -17,7 +17,9 @@
 # 개발툴 및 언어
 Server : AWS EC2(Ubuntu)
 
-Framework : Flask (Python) <img alt="Python" src ="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
+Framework : Flask (Python) 
+<img alt="Python" src ="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
+<img alt="Python" src ="https://img.shields.io/badge/Flask-000000.svg?&style=for-the-badge&logo=Flask&logoColor=white"/>
 
 Database : MongoDB
 
