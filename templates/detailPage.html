@@ -215,6 +215,11 @@
         .content {
             line-height: 30px;
         }
+        .wrap-top{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -418,34 +423,43 @@
 
 
 {#    ---------------------------------------------#}
-{#리뷰 목록#}
-<ul class="reviews" id="reviews">
-    {% for review in reviews %}
-        {% set review_one = review["review"] %}
-        {% set star_one = '⭐' * review["star"]|int %}
-        {% set review_num = review["review_num"] %}
-        {% set review_writer = review["id"] %}
-        <p>
-            <li>
-        <div class="box review-box">
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        {{ star_one }}
-                        {% if review_writer == current_id or current_id == None %}
-                            <button onclick="delete_review({{ review_num }})" type="button"
-                                    class="button is-danger red-btn">리뷰 삭제
-                            </button>
-                        {% endif %}
-                        <br>{{ review_one }}
-                    </div>
-                </div>
-            </article>
-        </div>
-        </li>
-        </p>
-    {% endfor %}
-</ul>
+
+        {#리뷰 목록#}
+        <ul class="reviews" id="reviews">
+            {% for review in reviews %}
+                {% set review_one = review["review"] %}
+                {% set star_one = '⭐' * review["star"]|int %}
+                {% set review_num = review["review_num"] %}
+                {% set review_writer = review["id"] %}
+                <p>
+                    <li>
+                        <div class="box review-box">
+                          <article class="media">
+                            <div class="media-content">
+                              <div class="content">
+                                 <div class="wrap-top">
+                                      <div>{{ star_one }}</div>
+                                      <div>
+                                          {% if review_writer == current_id or current_id == None %}
+                                            <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger is-small red-btn">리뷰 삭제</button>
+                                          {% endif %}
+                                      </div>
+                                 </div>
+                                  <div>{{ review_one }}</div>
+{#                                  {{ star_one }}#}
+{#                                    {% if review_writer == current_id or current_id == None %}#}
+{#                                        <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger red-btn">리뷰 삭제</button>#}
+{#                                    {% endif %}#}
+{#                                  <br>{{ review_one }}#}
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                    </li>
+                </p>
+            {% endfor %}
+        </ul>
+
 
 {#        <ul class="reviews" id="reviews">#}
 {#            {% for review in reviews %}#}
