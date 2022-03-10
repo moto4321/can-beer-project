@@ -5,27 +5,94 @@
 <head>
     <meta charset="UTF-8">
     <title>캔을 Beer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
+
+    <!-- Vendor JS Files -->
+        <script src="static/assets/vendor/aos/aos.js"></script>
+        <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <script src="static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="static/assets/js/main.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <style>
+        *, html, body{
+            padding: 0px;
+            margin: 0px;
+        }
         .mypost {
             width: 95%;
             max-width: 500px;
             margin: 20px auto 0px auto;
             padding: 20px;
         }
-
         .mybtns {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-
             margin-top: 20px;
         }
         .reviews {
             width: 95%;
-            max-width: 700px;
+            {#max-width: 1000px;#}
+            min-width: 500px;
             padding: 20px;
             {#box-shadow: 0px 0px 10px 0px black;#}
             margin: 20px auto;
@@ -52,17 +119,60 @@
 
             margin-top: 50px;
         }
-
         .top-content {
-
-            align-items: center;
-            justify-content: center;
             align-items: center;
             display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
             max-width: 900px;
             margin: auto;
+            {#border: 1px solid blue;#}
         }
-
+        .top-content > .col{
+            {#border: 1px solid red;#}
+            {#height: 50%;#}
+            {#width: 50%;#}
+            {#display: inline-block;#}
+        }
+        .text-light > a{
+            color: black;
+            text-decoration: none;
+        }
+        .is-outlined{
+            text-decoration: none;!important;
+        }
+        .star-label{
+            {#background-color: rgb(223, 77, 77);#}
+            background-color: white;
+            color: red;
+        }
+        .blank{
+            color: white;
+            font-size: 30px;
+        }
+        .write-box{
+            width: 45%;
+            min-width: 500px;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 24px 0px;
+            padding: 30px;
+            margin: 100px auto 0 auto;
+        }
+        .review-box{
+            width: 47%;
+            min-width: 500px;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 24px 0px;
+            padding: 30px;
+            margin: 20px auto;
+        }
+        .wrap-bottom{
+            margin-top: 20px;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+        .content{
+            line-height: 30px;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -124,7 +234,6 @@
         }
 
         function update_post() {
-
             $.ajax({
                 type: 'POST',
                 url: '/update/detail',
@@ -141,16 +250,44 @@
     </script>
 </head>
 <body>
-    <h1>캔을 Beer!</h1>
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-between">
+            <div class="logo">
+                <h1 class="text-light"><a href="index.html">캔을 Beer!</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+{#                    {% if isLogin %}#}
+{#                    <li><a href="/layout_writing">신상품 등록</a></li>#}
+{#                    <li><a href="/logout">로그아웃</a></li>#}
+{#                    {% else %}#}
+{#                    <li><a href="/login">로그인</a></li>#}
+{#                    <li><a href="/register">회원가입</a></li>#}
+{#                    {% endif %}#}
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+
+    {#윗부분#}
     <div class="row row-cols-1 row-cols-md-2 g-4 top-content">
+        {#맥주 이미지 #}
         <div class="col">
             <div class="card">
                 <img src="../static/{{ detail.file }}"  class="card-img-top" alt="...">
             </div>
         </div>
+
+        {#맥주 설명#}
         <div class="col">
             <div class="card">
                 <div class="card-body">
+{#                    <div class="blank">blank</div>#}
                     <p><h5 class="card-title">맥주명 : {{ detail.beer_name }}</h5></p>
                     <p class="card-text">타입 : {{ detail.beer_type }}</p>
                     <p class="card-text">제조사 : {{ detail.beer_company }}</p>
@@ -159,11 +296,14 @@
                     {% for price in detail.price %}
                         <p class="card-text">{{ price.store }} 에서 1개에 {{ price.one }}원 4개에 {{ price.four }}원</p>
                     {% endfor %}
-
+                    <div class="blank">blank</div>
                 </div>
+
             </div>
         </div>
     </div>
+
+
     <div class="delbtn">
 {#        <button onclick="update_post()" type="button" class="btn btn-success">게시물 수정</button>#}
         <a href="{{
@@ -176,45 +316,116 @@
                         beer_num=detail.beer_num,
                         beer_price_old=detail.price
                     )
-                }}"><button type="button" class="btn btn-success">게시물 수정</button></a>
+                }}">
+            <button class="button is-danger is-outlined red-btn" type="button" type="button" onclick="">게시물 수정</button>
+        </a>
     </div>
-    <div class="mypost" id="post-box">
-        <div class="form-floating mb-3">
-            <input id="review" type="text" class="form-control" placeholder="name@example.com">
-            <label>리뷰 작성</label>
+
+{#    리뷰 작성하는 박스 -텍스트에리아, 셀렉트박스, 버튼#}
+    <form class="box write-box">
+{#        텍스트에리아#}
+        <textarea class="textarea" id="review" placeholder="리뷰를 입력해주세요"></textarea>
+
+        <div class="wrap-bottom">
+    {#        셀렉트박스#}
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                  <div class="input-group mb-3">
+                        <label class="input-group-text star-label" for="inputGroupSelect01">별점</label>
+                        <select class="form-select" id="star">
+                            <option selected>-- 선택하기 --</option>
+                            <option value="1">⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                        </select>
+                    </div>
+              </div>
+            </div>
+
+    {#        버튼#}
+            <div class="field">
+                <div class="control">
+                    <button class="button is-danger red-btn" type="button" onclick="post_review()">리뷰 작성</button>
+                </div>
+            </div>
         </div>
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">별점</label>
-            <select class="form-select" id="star">
-                <option selected>-- 선택하기 --</option>
-                <option value="1">⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="5">⭐⭐⭐⭐⭐</option>
-            </select>
-        </div>
-        <div class="mybtns">
-            <button onclick="post_review()" type="button" class="btn btn-dark">리뷰 작성</button>
-        </div>
+    </form>
+
+{#    ///////////////////////////////////////////////////////////////////////////////#}
+{#    <div class="mypost" id="post-box">#}
+{#        <div class="form-floating mb-3">#}
+{#            <input id="review" type="text" class="form-control" placeholder="name@example.com">#}
+{#            <label>리뷰 작성</label>#}
+{#        </div>#}
+{#        <div class="input-group mb-3">#}
+{#            <label class="input-group-text star-label" for="inputGroupSelect01">별점</label>#}
+{#            <select class="form-select" id="star">#}
+{#                <option selected>-- 선택하기 --</option>#}
+{#                <option value="1">⭐</option>#}
+{#                <option value="2">⭐⭐</option>#}
+{#                <option value="3">⭐⭐⭐</option>#}
+{#                <option value="4">⭐⭐⭐⭐</option>#}
+{#                <option value="5">⭐⭐⭐⭐⭐</option>#}
+{#            </select>#}
+{#        </div>#}
+{#        <div class="mybtns">#}
+{#            <button class="button is-danger red-btn" type="button" onclick="post_review()">리뷰 작성</button>#}
+{#        </div>#}
+
+
+
+
+{#    ---------------------------------------------#}
+        {#리뷰 목록#}
         <ul class="reviews" id="reviews">
-            {%  for review in reviews %}
+            {% for review in reviews %}
                 {% set review_one = review["review"] %}
                 {% set star_one = '⭐' * review["star"]|int %}
                 {% set review_num = review["review_num"] %}
                 {% set review_writer = review["id"] %}
                 <p>
                     <li>
-                        {{ review_one }}
-                        {{ star_one }}
-                        {% if review_writer == current_id or current_id == None %}
-                            <button onclick="delete_review({{ review_num }})" type="button" class="btn btn-danger btn-sm">리뷰 삭제</button>
-                        {% endif %}
+                        <div class="box review-box">
+                          <article class="media">
+                            <div class="media-content">
+                              <div class="content">
+                                  {{ star_one }}
+                                    {% if review_writer == current_id or current_id == None %}
+                                        <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger red-btn">리뷰 삭제</button>
+                                    {% endif %}
+                                  <br>{{ review_one }}
+                              </div>
+                            </div>
+                          </article>
+                        </div>
                     </li>
-                    <hr />
                 </p>
             {% endfor %}
         </ul>
+
+{#        <ul class="reviews" id="reviews">#}
+{#            {% for review in reviews %}#}
+{#                {% set review_one = review["review"] %}#}
+{#                {% set star_one = '⭐' * review["star"]|int %}#}
+{#                {% set review_num = review["review_num"] %}#}
+{#                {% set review_writer = review["id"] %}#}
+{#                <p>#}
+{#                    <li>#}
+{#                        {{ review_one }}#}
+{#                        {{ star_one }}#}
+{#                        {% if review_writer == current_id or current_id == None %}#}
+{#                            <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger red-btn">리뷰 삭제</button>#}
+{#                        {% endif %}#}
+{#                    </li>#}
+{#                    <hr />#}
+{#                </p>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+
+
+
     </div>
 </body>
 </html>
