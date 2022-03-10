@@ -134,6 +134,63 @@
                 alert("비밀번호를 입력해주세요")
                 $('#userpw').focus()
             }
+<<<<<<< HEAD
+            .input:active{
+                border-color: #25cff2;
+                border-size: 1px;
+                box-shadow: none;
+            }
+            .field{
+                margin-bottom: 30px;
+            }
+            .label{
+                color: white;
+                font-size: 1px;
+            }
+            .lastdiv{
+                text-align: center;
+            }
+            button:hover {
+                background: rgb(253, 92, 40);
+            }
+            .red-btn{
+                margin-left: 10px;
+            }
+        </style>
+        <script>
+            {#// {% if msg %}#}
+            {#//     alert("{{ msg }}")#}
+            {#// {% endif %}#}
+            // ['쿠키'라는 개념에 대해 알아봅시다]
+            // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
+            // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
+            // 쿠키가 있기 때문에, 한번 로그인하면 네이버에서 다시 로그인할 필요가 없는 것입니다.
+            // 브라우저를 닫으면 자동 삭제되게 하거나, 일정 시간이 지나면 삭제되게 할 수 있습니다.
+            function login() {
+                if(userid == ""){
+                    alert("아이디를 입력해주세요")
+                    $('#userid').focus()
+                }
+                if(userpw == ""){
+                    alert("비밀번호를 입력해주세요")
+                    $('#userpw').focus()
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/api/login",
+                    data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+                            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+                            $.cookie('mytoken', response['token']);
+                            window.location.href = '/'
+                            alert('로그인 완료!')
+                        } else {
+                            // 로그인이 안되면 에러메시지를 띄웁니다.
+                            alert(response['msg'])
+                        }
+=======
             $.ajax({
                 type: "POST",
                 url: "/api/login",
@@ -148,6 +205,7 @@
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
+>>>>>>> 69aa1437c80a036d04611ecd9a634fe84afc1561
                     }
                 }
             })
@@ -173,6 +231,50 @@
     </div>
 </header><!-- End Header -->
 
+<<<<<<< HEAD
+        </script>
+
+    </head>
+    <body>
+        <!-- ======= Header ======= -->
+        <header id="header" class="d-flex align-items-center">
+            <div class="container d-flex justify-content-between">
+                <div class="logo">
+                    <h1 class="text-light"><a href="index.html">캔을 Beer!</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                </div>
+
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a href="/register">회원가입</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+            </div>
+        </header><!-- End Header -->
+
+        <form class="box">
+            <div class="field">
+                <label class="label">blank</label>
+                <div class="control">
+                    <input class="input" id="userid" type="text" placeholder="ID">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">blank</label>
+                <div class="control">
+                    <input class="input" id="userpw" type="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">blank</label>
+                <div class="control lastdiv">
+                <button class="button is-danger red-btn" onclick="login()">로그인</button>
+                </div>
+            </div>
+        </form>
+=======
 <form class="box">
     <div class="field">
         <label class="label">blank</label>
@@ -193,6 +295,7 @@
         </div>
     </div>
 </form>
+>>>>>>> 69aa1437c80a036d04611ecd9a634fe84afc1561
 
 </body>
 </html>
