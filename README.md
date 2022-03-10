@@ -14,7 +14,9 @@
 <br/><br/><br/><br/><br/>
 
 프로젝트 화면
-![스크린샷 2022-03-10 오후 4 30 10](https://user-images.githubusercontent.com/67586085/157611220-8c861b78-f267-4db0-a437-f2bd311d209b.png){: width="100" height="100"}
+
+<img src="https://user-images.githubusercontent.com/67586085/157611220-8c861b78-f267-4db0-a437-f2bd311d209b.png" width="500">
+
 ![스크린샷 2022-03-10 오후 4 30 51](https://user-images.githubusercontent.com/67586085/157611235-c9a20431-6d93-498c-9fa8-24e245f0447c.png){: width="100" height="100"}
 ![스크린샷 2022-03-10 오후 4 31 13](https://user-images.githubusercontent.com/67586085/157611243-875757c1-0203-4c82-b108-081db8a6bcfe.png){: width="100" height="100"}
 
