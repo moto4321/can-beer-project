@@ -54,7 +54,7 @@
     <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet'>
     </style>
     <!-- Template Main CSS File -->
     <style>
@@ -96,14 +96,14 @@
         .wrap {
 
             width: 600px;
-            margin-top: 20px;
+            margin-top: 30px;
             margin: auto;
-            font-family: 'Stylish', sans-serif;
-            padding: 50px 40px 20px 20px;
-            text-align: center;
+            font-family: "Muli", sans-serif;
+            padding: 50px 50px 20px 20px;
+            text-align: left;
 
-            justify-content: center;
-            align-items: center;
+            justify-content: left;
+            align-items: left;
 
 
         }
@@ -129,14 +129,12 @@
         let beer_num_old = result[4][1]
 
         $(document).ready(function () {
-
             bsCustomFileInput.init()
-
             // beer_num이 있다면 update
             if (result[4][1] !== '') {
                 updateState = true
             }
-            {#console.log(result)#}
+
 
             $("#beer-name").val(result[0][1])
             $("#beer-type").val(result[1][1])
@@ -276,14 +274,17 @@
     <br>
     <div class="container">
         <div class="posting-box" id="question">
+            <br>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="file">
                 <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
             </div>
+            <br><br>
             <div class="beer-name">
                 <label>맥주 이름을 입력해주세요</label>
                 <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
             </div>
+            <br>
             <div class="beer-type">
                 <label>맥주 종류를 입력해주세요</label>
                 <select class="form-control" id="beer-type">
@@ -295,56 +296,60 @@
                     <option>발포주</option>
                 </select>
             </div>
+            <br>
             <div class="form-group">
                 <label>맥주 제조사를 입력해주세요</label>
                 <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
             </div>
-
+            <br>
             <div class="form-group">
                 <label>맥주 제조국를 입력해주세요</label>
                 <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
             </div>
+            <br>
             <div class="form-group">
                 <label>맥주 제조날짜</label>
                 <p><input type="date" id="beer-date"></p>
             </div>
+            <br>
             <div class="form-group">
                 <label>미니스톱에서 파나요?</label>
                 <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
+                <br>
                 <label>GS25에서 파나요?</label>
                 <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
+                <br>
                 <label>CU에서 파나요?</label>
                 <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
+                <br>
                 <label>세븐일레븐에서 파나요?</label>
                 <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-
+                <br>
                 <label>노브랜드에서 파나요?</label>
                 <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
             </div>
-
+            <br>
             <div class="text-center">
                 <button type="button" class="btn btn-outline-success" onclick="posting_new()">작성하기</button>
             </div>
             <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
                 <i class="bi bi-arrow-up-short"></i></a>
+
         </div>
     </div>
 </div>
