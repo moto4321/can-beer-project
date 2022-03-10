@@ -129,14 +129,12 @@
         let beer_num_old = result[4][1]
 
         $(document).ready(function () {
-
             bsCustomFileInput.init()
-
             // beer_num이 있다면 update
             if (result[4][1] !== '') {
                 updateState = true
             }
-            {#console.log(result)#}
+
 
             $("#beer-name").val(result[0][1])
             $("#beer-type").val(result[1][1])
@@ -345,6 +343,7 @@
             </div>
             <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
                 <i class="bi bi-arrow-up-short"></i></a>
+
         </div>
     </div>
 </div>
