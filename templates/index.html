@@ -101,7 +101,7 @@
             <div class="row portfolio-container" data-aos="fade-up">
                 {% for row in content_list %}
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app"
-                         onclick="window.location.href='/detail/{{ row.beer_num }}'">
+                         onclick="window.location.href='/detail/{{ row.beer_num }}'" align="center">
                         <img height="300px" src="/static/{{ row.file }}">
                         <div class="portfolio-info" align="center">
                             <h2>{{ row.beer_name }}</h2>
