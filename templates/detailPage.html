@@ -173,6 +173,11 @@
         .content{
             line-height: 30px;
         }
+        .wrap-top{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -392,11 +397,20 @@
                           <article class="media">
                             <div class="media-content">
                               <div class="content">
-                                  {{ star_one }}
-                                    {% if review_writer == current_id or current_id == None %}
-                                        <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger red-btn">리뷰 삭제</button>
-                                    {% endif %}
-                                  <br>{{ review_one }}
+                                 <div class="wrap-top">
+                                      <div>{{ star_one }}</div>
+                                      <div>
+                                          {% if review_writer == current_id or current_id == None %}
+                                            <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger is-small red-btn">리뷰 삭제</button>
+                                          {% endif %}
+                                      </div>
+                                 </div>
+                                  <div>{{ review_one }}</div>
+{#                                  {{ star_one }}#}
+{#                                    {% if review_writer == current_id or current_id == None %}#}
+{#                                        <button onclick="delete_review({{ review_num }})" type="button" class="button is-danger red-btn">리뷰 삭제</button>#}
+{#                                    {% endif %}#}
+{#                                  <br>{{ review_one }}#}
                               </div>
                             </div>
                           </article>
