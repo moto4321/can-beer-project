@@ -115,29 +115,33 @@
 
         {#let beer_num_old = ''#}
 
-
+        // 업데이트 상태 : 새로운 게시물인지 기존을 업데이트 하는건지 플래그
         let updateState = false
         console.log(decodeURI(window.location.search))
         let len = decodeURI(window.location.search).length
         let temp = decodeURI(window.location.search).substr(1, len - 1)
+        // url로 들어온 각 파라미터 쪼개기
         let arr = temp.split("&")
         let result =[]
+        // 쪼개진 파라미터를 '='을 기준으로 쪼개기
         for (let i = 0; i < arr.length; i++) {
             result.push(arr[i].split("="))
         }
 
         let beer_num_old = result[4][1]
+        // url에서 기존 beer_num 가져오기
 
         $(document).ready(function () {
 
             bsCustomFileInput.init()
 
-            // beer_num이 있다면 update
+            // beer_num이 있다면 updateState를 true로 변경
             if (result[4][1] !== '') {
                 updateState = true
             }
             {#console.log(result)#}
 
+            // 각 인풋에 쪼갠 url을 데이터에 맞게 넣기
             $("#beer-name").val(result[0][1])
             $("#beer-type").val(result[1][1])
             $("#beer-company").val(result[2][1])
@@ -145,33 +149,31 @@
             $("#beer-date").val(result[5][1])
 
 
-
-            {#console.log(updateState)#}
             let aa = []
             for (let i = 6; i < result.length; i++) {
                 aa.push(result[i][1].split("+"))
             }
 
-            {#console.log(aa)#}
 
             let bb = []
             for (let i = 0; i < aa.length; i++) {
                 bb.push(aa[i][3])
 
             }
+
+            // 맥주 1캔 가격 리스트
             let one = []
             for (let i = 0; i < bb.length; i++) {
                 one.push(bb[i].split("%"))
             }
 
+            // 맥주 4캔 가격 리스트
             let four = []
             for (let i = 0; i < aa.length; i++) {
                 let last = aa[i][5].substr(0, aa[i][5].length - 1)
                 {#let last = aa[i][5]#}
                 four.push(last)
             }
-
-            console.log(four)
 
 
             for (let i = 6; i < result.length; i++) {

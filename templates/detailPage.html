@@ -123,20 +123,7 @@
             })
         }
 
-        function update_post() {
 
-            $.ajax({
-                type: 'POST',
-                url: '/update/detail',
-                data: {
-                    beer_num: {{ beer_num }}
-                },
-                success: function (response) {
-                    console.log('success')
-                    window.location.href='/layout_writing'
-                }
-            })
-        }
 
     </script>
 </head>
