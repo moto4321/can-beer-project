@@ -16,6 +16,8 @@
 
 # 개발툴 및 언어
 Server : AWS EC2(Ubuntu)
+<img alt="Python" src ="https://img.shields.io/badge/AmazonAWS-232F3E.svg?&style=for-the-badge&logo=AmazonAWS&logoColor=white"/>
+
 
 Framework : Flask (Python) 
 <img alt="Python" src ="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
