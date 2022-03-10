@@ -360,8 +360,8 @@ def api_login():
         payload = {
             'id': id_receive,
             # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)
-            #'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
-            'exp': datetime.utcnow() + timedelta(seconds=10)
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
+            # 'exp': datetime.utcnow() + timedelta(seconds=10)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
